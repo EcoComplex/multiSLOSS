@@ -1,5 +1,6 @@
 # Why there are more species in several small patches vs few large patches: a multi-species modeling approach
 
+Leonardo A. Saravia, Ulises Balza, Fernando Momo?, Laura Jane Graham <l.graham@bham.ac.uk> ?
 
 ## Abstract
 
