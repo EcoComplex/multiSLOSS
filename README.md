@@ -1,6 +1,6 @@
 # Why there are more species in several small patches vs few large patches: a multi-species modeling approach
 
-Leonardo A. Saravia ^1^, Ulises Balza^2^, Fernando Momo?, Laura Jane Graham <l.graham@bham.ac.uk> ?
+Leonardo A. Saravia ^1^, Ulises Balza ^2^, Fernando Momo?, Laura Jane Graham <l.graham@bham.ac.uk> ?
 
 1. Instituto de Ciencias. Universidad Nacional de General Sarmiento.	J.M. Gutierrez 1159 (1613), Los Polvorines.	Buenos Aires, Argentina.
 	
@@ -17,7 +17,7 @@ Still, the policies of many conservation agencies are prioritizing the preservat
 
 ## Methods
 
-## Model
+### Model
 
 * **MultipleContactNeutralMigrat.nlogo** A multiple species neutral/hierarchical model described in with 
 	degraded sites that cannot be colonized
