@@ -61,3 +61,25 @@ Habitat loss is a primary threat to biodiversity across the planet, yet contenti
 
 Reducing habitat loss should be a top priority for conservation planners. However, researchers should also investigate the indirect impacts of habitat loss on biodiversity through fragmentation effects. This research aims to identify windows of opportunity where habitat configuration can mitigate to some extent the effects of habitat loss, particularly through the maintenance of functional connectivity.
 
+
+
+----------
+
+@Neuhauser1998
+
+ The key quantity for predicting the outcome of habitat destruction on species survival is the relationship between the mean dispersal distance and the mean distance between inhabitable and destroyed sites. We contrast the hierarchical model with a version of the Lotka–Volterra model of interspecific competition and show that habitat destruction can alter the dominance relationship between species by reducing intraspecific competition.
+
+
+----
+
+
+@Adler2018
+
+Meta-analisis la competencia intra especifica es 5 veces mayor que la inter especifica en communidades vegetales --> estabilidad
+
+
+----
+
+@Fletcher2018a
+
+Habitat loss is often considered the greatest near-term threat to biodiversity. Yet the impact of habitat fragmentation, or the change in habitat configuration for a given amount of habitat loss, has been intensely debated. We isolated effects of habitat loss from fragmentation on the demography, movement, and abundance of wild populations of a specialist herbivore, Chelinidea vittiger, by removing 2,088 patches across 15 landscapes. We compared fragmentation resulting from random loss, which is often considered in theory, to aggregated loss, which is often observed in the real world. When quantifying fragmentation caused by random vs. aggregated loss, aggregated loss led to less fragmented landscapes than random loss based on patch isolation, but more fragmented landscapes when based on isolation at a larger mesoscale scale defined by dispersal distances of C. vittiger. Overall, habitat loss decreased population size and demographic parameters, with thresholds occurring at approximately 70–80% patch loss. Synergistic effects also occurred, where an aggregated pattern of loss had negative effects at low, but not high, amounts of habitat loss. Effects on population size of C. vittiger were driven by reductions in movement and subsequent reproduction. The direction of habitat fragmentation effects from random and aggregated loss treatments, for a given habitat amount, was conflictingly positive or negative depending on the scale at which fragmentation was quantified. Fragmentation quantified at the scale of dispersal for this species best explained population size and highlighted that fragmentation had negative effects at a mesoscale. Our results emphasize the importance of quantifying habitat fragmentation at biologically appropriate scales.
