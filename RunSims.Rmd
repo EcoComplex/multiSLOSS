@@ -1,7 +1,7 @@
 ---
-title: "Single large or Several Small SLOSS "
+title: "Running simulations of MultipleContactNeutralMigrat.nlogo"
 author: "Leonardo A. Saravia"
-date: "9/3/2019"
+date: "8/11/2022"
 output: html_document
 editor_options: 
   chunk_output_type: console
@@ -13,6 +13,8 @@ knitr::opts_chunk$set(echo = FALSE)
 needed_packages <- c(
     "tidyverse"
   , "lubridate"
+  , "future"
+  , "tictoc"
   , "nlrx")
 
 lapply(needed_packages, function(x) { if(!require(x,character.only = TRUE)) install.packages(x)} )
@@ -20,35 +22,131 @@ lapply(needed_packages, function(x) { if(!require(x,character.only = TRUE)) inst
 theme_set(theme_bw())
 source("R/functions.r")
 
+#
+# Where the NetLogo model is
+# Setup for nlrx 
+#
+if( Sys.info()['nodename'] =="ls-pro") {
+  simfolder <- "/home/leonardo/Dropbox/Projects/DynamicForestExtinction"
+  
+} else if(Sys.info()['nodename'] =="biologia2018") {                     # Server UNGS
+  simfolder <- "/home/leonardo/Dropbox/Projects/DynamicForestExtinction"                       
+
+}
+
+# Unix default NetLogo installation path (adjust to your needs!):
+#
+netlogopath <- file.path("/home/leonardo/NetLogo")
+modelpath <- file.path(simfolder, "MultipleContactNeutralMigrat.nlogo")
+outpath <- file.path(simfolder,"Simulations")
+
+# If not defined set the JAVA version of your local 
+if(Sys.getenv("JAVA_HOME")==""){
+  Sys.setenv(JAVA_HOME = "/usr/lib/jvm/java-11-openjdk-amd64")
+  ## "/usr/lib/jvm/java-8-oracle"
+}
+
+nl <- nl(nlversion = "6.2",
+         nlpath = netlogopath,
+         modelpath = modelpath,
+         jvmmem = 2048)
+
+
 ```
 
 ## Why do several small patches hold more species that few large patches?
-
-## Simulaciones para ajuste usando Latin Hypercubic Sampling 
-
-* Incursion by common, generalist species. 
-* Minimun patch size selective extinction and nestedness
-* Time since patch creation, accumulation of species losses
-* Habitat heterogeneity environmental clumping patchy species distribution
-* Dominance of colonization/inmigration
-* Population variability spreading the risk
 
 ## Lambda = 4
 
 * Initial conditions: migration from the regional community and after the area is filled of individuals, then 60% of the area degraded with regular patches (t= 200 for lambda=4 )
 
+```{r SLOSS_lambda4_simulations_lambda4,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=TRUE}
+
+# pf = probability of fragmentation, hps = habitat patch size , dd=dispersal distance 
+#
+nl@experiment <- experiment(expname="NoSelection_pf06_hps3-61_dd1-3",
+                            outpath=outpath,
+                            repetition=1,
+                            tickmetrics="false",
+                            idsetup="setup",
+                            idgo="go",
+                            runtime=0,
+                            metrics=c("birds-at-deforestation", "calc-number-of-species","calc-shannon-diversity","count birds", "mean-free-path"),
+                            variables = list("birds-dispersal-distance" = list(values=c(1.1, 1.2, 1.5, 2, 3)),
+                                              "habitat-patch-size" = list(values=c(3, 9, 29, 61))
+                                             ),
+                            constants = list("world-width" = 199,
+                                             "world-height" = 199,
+                                             "initial-population" = 0,
+                                             "max-birds-species" = 100,
+                                             "birth-rate-birds" = 4,
+                                             "death-rate-birds" = 1,
+                                             "migration-rate-birds" = 0.001,
+                                             "Video" = "false",
+                                             "prob-frag" =  0.6,
+                                             "Deforestation-at-time" = 200,
+                                             "end-time" = 1500,
+                                             "Migration0-at-deforestation" = "false",
+                                             "deforestation-type" = "\"regular\"",
+                                             "birds-behavior" = "\"NoSelection\"",
+                                             "replacement-rate" = 0.0
+                                             ))
 
 
-```{r SLOSS_lambda4_simulations}
-require(tidyverse)
+#
+# Run 10 times this do not set the run variable for output 
+#
+# nseeds * number_of_parameters / split = 10 * 300 / 4 - total number of jobs = nseeds * split = 10*4
+#
 
-source("R/functions.r")
+nl@simdesign <- simdesign_ff(nl=nl,
+                               nseeds=10)
+
+# run in Paralell 
+#
+plan(multisession)
+tic()
+results <- run_nl_all(nl,split = 4)
+#results <- run_nl_all(nl,split = 4)
+toc()
+plan(sequential)
+names(results)
+
+#
+# Write the output 
+#
+setsim(nl, "simoutput") <- results 
+write_simoutput(nl)
+```
+
+
+
+```{r readSimulations, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
+# Read previous simulations
+#
+if( file.exists("Simulations/sloss_sim_ff.rds")) {
+
+  sloss_sim <- readRDS("Simulations/sloss_sim_ff.rds") 
+  
+} else {
+  sloss_sim <- tibble()
+}
+
+# Read netlogo simulations and 
+# Convert the list of mean_free_path to degraded_mfp and non_degraded_mfp
+#
+mdl <- read_netlogo_simul(file.path(outpath,"NoSelection_pf06_hps3-61_dd1-3_ff.csv"),skip=0) %>% 
+  mutate(mean_free_path=str_sub(mean_free_path,2,-2)) %>% 
+  separate(mean_free_path, c("non_degraded_mfp","degraded_mfp"), sep=" ",convert=TRUE)
+
+
+sloss_sim <- bind_rows(sloss_sim,mdl)
+
+
+## Old code to plot 
 
 # Neutral communities 
 #
-mdl <- read_netlogo_simul("Simulations/MultipleContactNeutralMigrat_NoSelection_pf06_hpf3-59_dd1-3.csv")
-sloss_sim <- mdl
-
 names(mdl)
 #
 # Plot for neutral communities 
@@ -56,8 +154,8 @@ names(mdl)
 mdl1 <- mdl %>% group_by(birds_dispersal_distance, habitat_patch_size) %>% summarise(across(birds_at_deforestation:count_birds,mean)) %>% mutate(deltaPop = (count_birds - birds_at_deforestation )/ birds_at_deforestation  )
 
 
-require(plotly)
-plot_ly(data=mdl1, x=~birds_dispersal_distance, y=~habitat_patch_size, z=~calc_number_of_species, type="scatter3d", mode="markers", color=~calc_number_of_species, marker = list(size = 1))
+# require(plotly)
+# plot_ly(data=mdl1, x=~birds_dispersal_distance, y=~habitat_patch_size, z=~calc_number_of_species, type="scatter3d", mode="markers", color=~calc_number_of_species, marker = list(size = 1))
 
 mdl1 %>% ggplot(aes(x=birds_dispersal_distance,y=calc_number_of_species,color=habitat_patch_size)) + geom_point() + scale_color_viridis_c(guide = FALSE) + facet_wrap( ~habitat_patch_size ) + theme_bw()
 
@@ -114,7 +212,7 @@ mdl1 <-sloss_sim %>% count(habitat_patch_size,birds_dispersal_distance,birds_beh
 * For patch sizes 3 9 without connectivity between patches (dispersal 1.1 - 1.2 ) the patch populations get extinct 
 * Here I added another field "Migration0_at_deforestation" 
 
-```{r SLOSS_lambda4_simulations}
+```{r SLOSS_lambda4_simulations_lambda2,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
 require(tidyverse)
 
 source("R/functions.r")
@@ -203,9 +301,8 @@ mdl1 %>% filter(birds_dispersal_distance == 1.1 || birds_dispersal_distance == 3
 
 ## Not fragmented communities Lambda = 1.7 - 4
 
-* 100x100 world 
 
-```{r SLOSS_notfrag_simulations}
+```{r SLOSS_notfrag_simulations, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
 require(tidyverse)
 
 source("R/functions.r")
@@ -251,7 +348,7 @@ mdl1 %>% filter(birds_dispersal_distance == 1.1 || birds_dispersal_distance == 3
 
 ## Add more simulations lambda = 2 with Migration 
 
-```{r SLOSS_combined_plots}
+```{r SLOSS_combined_plots, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
 
 mdl <- read_netlogo_simul("Simulations/NoHiBi_pf06_hpf3-61_dd1-3_lambda2_Migrat.csv") 
 
@@ -280,7 +377,7 @@ saveRDS(sloss_sim, "Simulations/sloss_sim.rds")
 
 ## Plots of combined behaviors and patch 100
 
-```{r SLOSS_combined_plots}
+```{r SLOSS_combined_plots1, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
 require(tidyverse)
 
 source("R/functions.r")
