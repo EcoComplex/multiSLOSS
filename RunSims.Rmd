@@ -38,7 +38,7 @@ if( Sys.info()['nodename'] =="ls-pro") {
 #
 netlogopath <- file.path("/home/leonardo/NetLogo")
 modelpath <- file.path(simfolder, "MultipleContactNeutralMigrat.nlogo")
-outpath <- file.path(simfolder,"Simulations")
+outpath <- file.path("Simulations")
 
 # If not defined set the JAVA version of your local 
 if(Sys.getenv("JAVA_HOME")==""){
@@ -56,15 +56,18 @@ nl <- nl(nlversion = "6.2",
 
 ## Why do several small patches hold more species that few large patches?
 
-## Lambda = 4
+## Lambda = 1-4
 
-* Initial conditions: migration from the regional community and after the area is filled of individuals, then 60% of the area degraded with regular patches (t= 200 for lambda=4 )
+* Initial conditions: migration from the regional community and after the area is filled of individuals, then 60% of the area degraded with regular patches (t= 200 for lambda=4 ) 
+* Check simulations with Migration0-at-deforestation true or false to take into account that immigration happens at the borders and different kinds of deforestation patterns have different border size e.g. regular > randon block 
 
-```{r SLOSS_lambda4_simulations_lambda4,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=TRUE}
+```{r SLOSS_lambda14_simulations,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=TRUE}
 
 # pf = probability of fragmentation, hps = habitat patch size , dd=dispersal distance 
-#
-nl@experiment <- experiment(expname="NoSelection_pf06_hps3-61_dd1-3",
+# hps = habitat patch size
+# dd = dispersal distance 
+# brb = bird rate birds 
+nl@experiment <- experiment(expname="NoSelection_pf06_hps3-61_dd1-3_brb1-4",
                             outpath=outpath,
                             repetition=1,
                             tickmetrics="false",
@@ -73,15 +76,15 @@ nl@experiment <- experiment(expname="NoSelection_pf06_hps3-61_dd1-3",
                             runtime=0,
                             metrics=c("birds-at-deforestation", "calc-number-of-species","calc-shannon-diversity","count birds", "mean-free-path"),
                             variables = list("birds-dispersal-distance" = list(values=c(1.1, 1.2, 1.5, 2, 3)),
-                                              "habitat-patch-size" = list(values=c(3, 9, 29, 61))
+                                              "habitat-patch-size" = list(values=c(3, 9, 29, 61)),
+                                               "birth-rate-birds" = list(values=c(1.7, 2, 3, 4))
                                              ),
                             constants = list("world-width" = 199,
                                              "world-height" = 199,
                                              "initial-population" = 0,
                                              "max-birds-species" = 100,
-                                             "birth-rate-birds" = 4,
                                              "death-rate-birds" = 1,
-                                             "migration-rate-birds" = 0.001,
+                                             "migration-rate-birds" = 0.0001,
                                              "Video" = "false",
                                              "prob-frag" =  0.6,
                                              "Deforestation-at-time" = 200,
@@ -94,9 +97,10 @@ nl@experiment <- experiment(expname="NoSelection_pf06_hps3-61_dd1-3",
 
 
 #
-# Run 10 times this do not set the run variable for output 
+# Run nseeds=10 times 
 #
-# nseeds * number_of_parameters / split = 10 * 300 / 4 - total number of jobs = nseeds * split = 10*4
+# Total number of jobs = nseeds * split = 10*4 
+# Each job runs parameter input matrix / split = nrow(nl@simdesign@siminput) / split =  300 / 4 
 #
 
 nl@simdesign <- simdesign_ff(nl=nl,
@@ -119,7 +123,7 @@ setsim(nl, "simoutput") <- results
 write_simoutput(nl)
 ```
 
-
+## Read Simulations
 
 ```{r readSimulations, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
 # Read previous simulations
@@ -141,9 +145,14 @@ mdl <- read_netlogo_simul(file.path(outpath,"NoSelection_pf06_hps3-61_dd1-3_ff.c
 
 
 sloss_sim <- bind_rows(sloss_sim,mdl)
+saveRDS(sloss_sim, "Simulations/sloss_sim_ff.rds")
+
+```
 
 
-## Old code to plot 
+## Exploratory Plots
+
+```{r ExploratoryPlots, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
 
 # Neutral communities 
 #
