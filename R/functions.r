@@ -35,6 +35,14 @@ read_netlogo_simul <- function(fname,skip=6){
   return(mdl)
 }
 
+
+read_sloss_simul <- function(outpath,fname){
+  mdl <- read_netlogo_simul(file.path(outpath,fname),skip=0) %>% 
+  mutate(mean_free_path=str_sub(mean_free_path,2,-2)) %>% 
+  separate(mean_free_path, c("non_degraded_mfp","degraded_mfp"), sep=" ",convert=TRUE) %>% rowwise() %>%
+  mutate(netlogo_evaluate_patch_distr(find_cluster_sizes))
+}
+
 #' Estimate the critical point of species living inside and habitat (birds inside forest) 
 #'
 #' @param mdl 
@@ -72,3 +80,21 @@ estim_crit_point_size <- function(mdl,size){
   
   return(mdlp2)  
 }
+
+
+#' Evaluate patch distribution from netlogo list of patch sizes output "[]"
+#'
+#' @param br string with a netlogo list with [] and separated by blanks
+#'
+#' @return a data frame with results
+#' @export
+#'
+#' @examples
+netlogo_evaluate_patch_distr <- function(br) {
+  
+  pp <-  str_remove_all(br, "[\\[\\]]") %>% str_split(" ") %>% unlist() %>% as.numeric() 
+  # message(br)
+  tibble(max_patch=max(pp),tot_patch=sum(pp),num_patch=length(pp),mean_patch=mean(pp),median_patch=median(pp))
+
+}
+
