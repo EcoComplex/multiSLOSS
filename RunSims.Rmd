@@ -161,7 +161,7 @@ netlogo_evaluate_patch_distr(mdl$find_cluster_sizes[1])
 
 # Neutral communities 
 #
-mdl <- sloss_sim %>% filter(deforestation_type == "regular",birds_behavior=="NoSelection")
+mdl <- sloss_sim %>% filter(deforestation_type == "regular",birds_behavior=="NoSelection", habitat_patch_size != 199)
 names(mdl)
 #
 # Plot for neutral communities
@@ -619,7 +619,7 @@ ggsave("Figures/Hierarchical_Shannon_Dispersal_Lambda_regular.png",width=8,heigh
 
 * Initial conditions: migration from the regional community and after the area is filled of individuals, then 60% of the area degraded with regular patches (t= 200 for lambda=4 ) 
 
-```{r Selection_SLOSS_lambda14_simulations_regular,echo=FALSE,message=FALSE,warning=FALSE,eval=TRUE}
+```{r Selection_SLOSS_lambda14_simulations_regular,echo=FALSE,message=FALSE,warning=FALSE,eval=FALSE}
 
 # pf = probability of fragmentation, hps = habitat patch size , dd=dispersal distance 
 # hps = habitat patch size
@@ -705,10 +705,384 @@ saveRDS(sloss_sim, "Simulations/sloss_sim_ff.rds")
 
 ```
 
+# Plot for birth selection communities regular patterns 
+
+```{r ExploratoryPlotsSelectionRegular, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
+
+mdl <- sloss_sim %>% filter(deforestation_type == "regular", birds_behavior=="BirthSelection")
+names(mdl)
+#
+# summarize data 
+#
+mdl1 <- mdl %>% mutate(habitat_patch_size = habitat_patch_size+1) %>%
+                         group_by(birds_dispersal_distance, habitat_patch_size,birth_rate_birds) %>% summarise(across(birds_at_deforestation:count_birds,list(mean=mean, sd=sd, ql=~quantile(.x,probs=c((1-0.95)/2)), qh=~quantile(.x,probs=c(1-(1-0.95)/2)) ))) #  %>% mutate(deltaPop = (count_birds - birds_at_deforestation )/ birds_at_deforestation  )
+names(mdl1)
+
+# require(plotly)
+# plot_ly(data=mdl1, x=~birds_dispersal_distance, y=~habitat_patch_size, z=~calc_number_of_species, type="scatter3d", mode="markers", color=~calc_number_of_species, marker = list(size = 1))
+
+mdl1 %>%  
+  ggplot(aes(x = habitat_patch_size, y = calc_number_of_species_mean, color = factor(birds_dispersal_distance))) + 
+  geom_line(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = 1.2) +
+  geom_ribbon(aes(ymin = calc_number_of_species_ql, ymax = calc_number_of_species_qh, group = interaction(birds_dispersal_distance, birth_rate_birds), fill = factor(birds_dispersal_distance)), alpha = 0.3,colour=NA, show.legend = FALSE) +
+  scale_color_viridis_d() +
+  facet_wrap(~ birth_rate_birds, ncol = 4) + 
+  labs(color = "Dispersal\n distance") +
+  theme_bw() + xlab("Habitat Patch Size") + ylab("Number of species") +
+  theme(
+    legend.position = c(0.9,0.8)
+    ) 
+
+ggsave("Figures/Selection_Species_Dispersal_Lambda_regular.png",width=8,height=6,units="in",dpi=600)
+  
+
+# Shannon-Diversity  
+#
+mdl1 %>%  
+  ggplot(aes(x = habitat_patch_size, y = calc_shannon_diversity_mean, color = factor(birds_dispersal_distance))) + 
+  geom_line(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = 1.2) +
+  geom_ribbon(aes(ymin = calc_shannon_diversity_ql, ymax = calc_shannon_diversity_qh, group = interaction(birds_dispersal_distance, birth_rate_birds), fill = factor(birds_dispersal_distance)), alpha = 0.3,colour=NA, show.legend = FALSE) +
+  scale_color_viridis_d() +
+  facet_wrap(~ birth_rate_birds, ncol = 4) + 
+  labs(color = "Dispersal\n distance") +
+  theme_bw() + xlab("Habitat Patch Size") + ylab("Shannon Diversity") +
+  theme(
+    legend.position = c(0.9,0.8)
+    ) 
+
+
+ggsave("Figures/Selection_Shannon_Dispersal_Lambda_regular.png",width=8,height=6,units="in",dpi=600)
+
+
+```
+
+
+## Plots across neutral hierarchical selection modelos regular fragmentation
+
+```{r PlotsAcrossBehaviorRegular, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
+
+mdl <- sloss_sim %>% filter(deforestation_type == "regular")
+names(mdl)
+#
+# summarize data 
+#
+mdl1 <- mdl %>% mutate(habitat_patch_size = habitat_patch_size+1) %>%
+                         group_by(birds_dispersal_distance, habitat_patch_size,birth_rate_birds,birds_behavior) %>% summarise(across(birds_at_deforestation:count_birds,list(mean=mean, sd=sd, ql=~quantile(.x,probs=c((1-0.95)/2)), qh=~quantile(.x,probs=c(1-(1-0.95)/2)) ))) #  %>% mutate(deltaPop = (count_birds - birds_at_deforestation )/ birds_at_deforestation  )
+names(mdl1)
+
+mdl1 %>%  filter(birth_rate_birds == 2) %>% 
+  ggplot(aes(x = habitat_patch_size, y = calc_number_of_species_mean, color = factor(birds_dispersal_distance))) + 
+  geom_line(aes(group = interaction(birds_dispersal_distance, birds_behavior)),  size = 1.2) +
+  geom_ribbon(aes(ymin = calc_number_of_species_ql, ymax = calc_number_of_species_qh, group = interaction(birds_dispersal_distance, birds_behavior), fill = factor(birds_dispersal_distance)), alpha = 0.3,colour=NA, show.legend = FALSE) +
+  scale_color_viridis_d() +
+  facet_wrap(~ birds_behavior, ncol = 4) + 
+  labs(color = "Dispersal\n distance") +
+  theme_bw() + xlab("Habitat Patch Size") + ylab("Number of species") +
+  theme(
+    legend.position = c(0.9,0.8)
+    ) 
+
+ggsave("Figures/AcrossBehav_Species_Dispersal_Lambda2_regular.png",width=8,height=6,units="in",dpi=600)
+  
+
+# Shannon-Diversity  
+#
+mdl1 %>%  filter(birth_rate_birds == 2) %>% 
+  ggplot(aes(x = habitat_patch_size, y = calc_shannon_diversity_mean, color = factor(birds_dispersal_distance))) + 
+  geom_line(aes(group = interaction(birds_dispersal_distance, birds_behavior)),  size = 1.2) +
+  geom_ribbon(aes(ymin = calc_shannon_diversity_ql, ymax = calc_shannon_diversity_qh, group = interaction(birds_dispersal_distance, birds_behavior), fill = factor(birds_dispersal_distance)), alpha = 0.3,colour=NA, show.legend = FALSE) +
+  scale_color_viridis_d() +
+  facet_wrap(~ birds_behavior, ncol = 4) + 
+  labs(color = "Dispersal\n distance") +
+  theme_bw() + xlab("Habitat Patch Size") + ylab("Shannon Diversity") +
+  theme(
+    legend.position = c(0.9,0.8)
+    ) 
+
+
+ggsave("Figures/AcrossBehav_Shannon_Dispersal_Lambda2_regular.png",width=8,height=6,units="in",dpi=600)
+
+
+```
 
 
 
-## Not fragmented communities Lambda = 1.7 - 4
+## Not fragmented communities Lambda = 1.7 - 4 - No Selection communities 
+
+* Initial conditions: migration from the regional community and after the area is filled of individuals, then 60% of the area degraded with regular patches (t= 200 for lambda=4 ) 
+
+```{r NoSelection_SLOSS_lambda14_notfrag,echo=FALSE,message=FALSE,warning=FALSE,eval=FALSE}
+
+# pf = probability of fragmentation, hps = habitat patch size , dd=dispersal distance 
+# hps = habitat patch size
+# dd = dispersal distance 
+# brb = bird rate birds 
+nl@experiment <- experiment(expname="NoSelection_pf00_nofrag_dd1-3_brb1-4_regular",
+                            outpath=outpath,
+                            repetition=1,
+                            tickmetrics="false",
+                            idsetup="setup",
+                            idgo="go",
+                            runtime=0,
+                            metrics=c("birds-at-deforestation", "calc-number-of-species","calc-shannon-diversity","count birds"),
+                            variables = list("birds-dispersal-distance" = list(values=c(1.1, 1.2, 1.5, 2, 3)),
+                                              "birth-rate-birds" = list(values=c(1.7, 2, 3, 4))
+                                             ),
+                            constants = list("world-width" = 199,
+                                             "world-height" = 199,
+                                             "initial-population" = 0,
+                                             "max-birds-species" = 100,
+                                             "death-rate-birds" = 1,
+                                             "migration-rate-birds" = 0.0001,
+                                             "Video" = "false",
+                                             "prob-frag" =  0.6,
+                                             "Deforestation-at-time" = 0,
+                                             "end-time" = 1500,
+                                             "Migration0-at-deforestation" = "false",
+                                             "deforestation-type" = "\"regular\"",
+                                             "birds-behavior" = "\"NoSelection\"",
+                                             "replacement-rate" = 0.3
+                                             ))
+
+
+#
+# Run nseeds=10 times 
+#
+# Total number of jobs = nseeds * split = 30*2 
+# Each job runs parameter input matrix / split = nrow(nl@simdesign@siminput) / split =  80 / 2 
+#
+
+nl@simdesign <- simdesign_ff(nl=nl,
+                               nseeds=30)
+
+# run in Paralell 
+#
+plan(multisession)
+tic()
+results <- run_nl_all(nl,split = 2)
+#results <- run_nl_all(nl,split = 4)
+toc()
+plan(sequential)
+names(results)
+
+#
+# Write the output 
+#
+setsim(nl, "simoutput") <- results 
+write_simoutput(nl)
+```
+
+
+## Read Simulations NoFragmentation No Selection  regular Patterns
+
+
+```{r readSimulationsNoFragNSelectionRegular, echo=FALSE,message=FALSE,warning=FALSE,eval=FALSE}
+# Read previous simulations
+#
+if( file.exists("Simulations/sloss_sim_ff.rds")) {
+
+  sloss_sim <- readRDS("Simulations/sloss_sim_ff.rds") 
+  
+} else {
+  sloss_sim <- tibble()
+}
+
+# Read netlogo simulations and 
+# Convert the list of mean_free_path to degraded_mfp and non_degraded_mfp
+#
+mdl <- read_sloss_simul(outpath,"NoSelection_pf00_nofrag_dd1-3_brb1-4_regular_ff.csv") %>% 
+  mutate(habitat_patch_size = world_width, max_patch = (world_width+1) * (world_height+1) ) 
+
+sloss_sim <- bind_rows(sloss_sim,mdl)
+
+saveRDS(sloss_sim, "Simulations/sloss_sim_ff.rds")
+
+```
+
+
+## Not fragmented communities Lambda = 1.7 - 4 - Hierarchical communities 
+
+```{r Hierarchical_SLOSS_lambda14_notfrag,echo=FALSE,message=FALSE,warning=FALSE,eval=FALSE}
+
+# pf = probability of fragmentation, hps = habitat patch size , dd=dispersal distance 
+# hps = habitat patch size
+# dd = dispersal distance 
+# brb = bird rate birds 
+nl@experiment <- experiment(expname="Hierarchical_pf00_nofrag_dd1-3_brb1-4_regular",
+                            outpath=outpath,
+                            repetition=1,
+                            tickmetrics="false",
+                            idsetup="setup",
+                            idgo="go",
+                            runtime=0,
+                            metrics=c("birds-at-deforestation", "calc-number-of-species","calc-shannon-diversity","count birds"),
+                            variables = list("birds-dispersal-distance" = list(values=c(1.1, 1.2, 1.5, 2, 3)),
+                                              "birth-rate-birds" = list(values=c(1.7, 2, 3, 4))
+                                             ),
+                            constants = list("world-width" = 199,
+                                             "world-height" = 199,
+                                             "initial-population" = 0,
+                                             "max-birds-species" = 100,
+                                             "death-rate-birds" = 1,
+                                             "migration-rate-birds" = 0.0001,
+                                             "Video" = "false",
+                                             "prob-frag" =  0.6,
+                                             "Deforestation-at-time" = 0,
+                                             "end-time" = 1500,
+                                             "Migration0-at-deforestation" = "false",
+                                             "deforestation-type" = "\"regular\"",
+                                             "birds-behavior" = "\"Hierarchical\"",
+                                             "replacement-rate" = 0.3
+                                             ))
+
+
+#
+# Run nseeds=10 times 
+#
+# Total number of jobs = nseeds * split = 30*2 
+# Each job runs parameter input matrix / split = nrow(nl@simdesign@siminput) / split =  80 / 2 
+#
+
+nl@simdesign <- simdesign_ff(nl=nl,
+                               nseeds=30)
+
+# run in Paralell 
+#
+plan(multisession)
+tic()
+results <- run_nl_all(nl,split = 2)
+#results <- run_nl_all(nl,split = 4)
+toc()
+plan(sequential)
+names(results)
+
+#
+# Write the output 
+#
+setsim(nl, "simoutput") <- results 
+write_simoutput(nl)
+```
+
+
+## Read Simulations Not Fragmented  Hierarchical = habitat_patch_size == 200 
+
+
+```{r readSimulationsNoFragHierarchical, echo=FALSE,message=FALSE,warning=FALSE,eval=FALSE}
+# Read previous simulations
+#
+if( file.exists("Simulations/sloss_sim_ff.rds")) {
+
+  sloss_sim <- readRDS("Simulations/sloss_sim_ff.rds") 
+  
+} else {
+  sloss_sim <- tibble()
+}
+
+# Read netlogo simulations and 
+# Convert the list of mean_free_path to degraded_mfp and non_degraded_mfp
+#
+mdl <- read_sloss_simul(outpath,"Hierarchical_pf00_nofrag_dd1-3_brb1-4_regular_ff.csv") %>% 
+  mutate(habitat_patch_size = world_width, max_patch = (world_width+1) * (world_height+1) ) 
+
+sloss_sim <- bind_rows(sloss_sim,mdl)
+
+saveRDS(sloss_sim, "Simulations/sloss_sim_ff.rds")
+
+#mdl <- sloss_sim %>% filter( Deforestation_at_time==0)
+
+```
+
+
+## Not fragmented communities Lambda = 1.7 - 4 - Selection communities 
+
+```{r BirthSelection_SLOSS_lambda14_notfrag,echo=FALSE,message=FALSE,warning=FALSE,eval=TRUE}
+
+# pf = probability of fragmentation, hps = habitat patch size , dd=dispersal distance 
+# hps = habitat patch size
+# dd = dispersal distance 
+# brb = bird rate birds 
+nl@experiment <- experiment(expname="BirthSelection_pf00_nofrag_dd1-3_brb1-4_regular",
+                            outpath=outpath,
+                            repetition=1,
+                            tickmetrics="false",
+                            idsetup="setup",
+                            idgo="go",
+                            runtime=0,
+                            metrics=c("birds-at-deforestation", "calc-number-of-species","calc-shannon-diversity","count birds"),
+                            variables = list("birds-dispersal-distance" = list(values=c(1.1, 1.2, 1.5, 2, 3)),
+                                              "birth-rate-birds" = list(values=c(1.7, 2, 3, 4))
+                                             ),
+                            constants = list("world-width" = 199,
+                                             "world-height" = 199,
+                                             "initial-population" = 0,
+                                             "max-birds-species" = 100,
+                                             "death-rate-birds" = 1,
+                                             "migration-rate-birds" = 0.0001,
+                                             "Video" = "false",
+                                             "prob-frag" =  0.6,
+                                             "Deforestation-at-time" = 0,
+                                             "end-time" = 1500,
+                                             "Migration0-at-deforestation" = "false",
+                                             "deforestation-type" = "\"regular\"",
+                                             "birds-behavior" = "\"BirthSelection\"",
+                                             "replacement-rate" = 0.3
+                                             ))
+
+
+#
+# Run nseeds=10 times 
+#
+# Total number of jobs = nseeds * split = 30*2 
+# Each job runs parameter input matrix / split = nrow(nl@simdesign@siminput) / split =  80 / 2 
+#
+
+nl@simdesign <- simdesign_ff(nl=nl,
+                               nseeds=30)
+
+# run in Paralell 
+#
+plan(multisession)
+tic()
+results <- run_nl_all(nl,split = 2)
+#results <- run_nl_all(nl,split = 4)
+toc()
+plan(sequential)
+names(results)
+
+#
+# Write the output 
+#
+setsim(nl, "simoutput") <- results 
+write_simoutput(nl)
+```
+
+## Read Simulations Not Fragmented  Hierarchical = habitat_patch_size == 200 
+
+
+```{r readSimulationsNoFragBirthSelection, echo=FALSE,message=FALSE,warning=FALSE,eval=FALSE}
+# Read previous simulations
+#
+if( file.exists("Simulations/sloss_sim_ff.rds")) {
+
+  sloss_sim <- readRDS("Simulations/sloss_sim_ff.rds") 
+  
+} else {
+  sloss_sim <- tibble()
+}
+
+# Read netlogo simulations and 
+# Convert the list of mean_free_path to degraded_mfp and non_degraded_mfp
+#
+mdl <- read_sloss_simul(outpath,"BirthSelection_pf00_nofrag_dd1-3_brb1-4_regular_ff.csv") %>% 
+  mutate(habitat_patch_size = world_width, max_patch = (world_width+1) * (world_height+1) ) 
+
+sloss_sim <- bind_rows(sloss_sim,mdl)
+
+saveRDS(sloss_sim, "Simulations/sloss_sim_ff.rds")
+
+#mdl <- sloss_sim %>% filter( Deforestation_at_time==0)
+
+```
 
 
 ```{r SLOSS_notfrag_simulations, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}

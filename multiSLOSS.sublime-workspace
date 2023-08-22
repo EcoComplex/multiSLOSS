@@ -1,0 +1,969 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Ant",
+				"Ant_Meta"
+			],
+			[
+				"Wedd",
+				"Weddell"
+			],
+			[
+				"out",
+				"outFile"
+			],
+			[
+				"tot",
+				"totBio"
+			],
+			[
+				"doub",
+				"double"
+			],
+			[
+				"len",
+				"length"
+			],
+			[
+				"mean",
+				"mean_sims"
+			],
+			[
+				"Re",
+				"ReplacementRate"
+			],
+			[
+				"DE",
+				"DeltaDq"
+			],
+			[
+				"Peri",
+				"PERIwd"
+			],
+			[
+				"ol",
+				"oldcd"
+			],
+			[
+				"BCI",
+				"BCIwd"
+			],
+			[
+				"d1_",
+				"d1_delta"
+			],
+			[
+				"bib",
+				"bib"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "SLOSS.Rmd",
+			"settings":
+			{
+				"buffer_size": 19625,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 9739,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					2,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AQAAAG4AAAAAAAAAbwAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAbgAAAAAAAABuAAAAAAAAAAAAAAAAAAAA"
+				],
+				[
+					3,
+					1,
+					"insert",
+					{
+						"characters": "*"
+					},
+					"AQAAAG8AAAAAAAAAcAAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAbwAAAAAAAABvAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					4,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAHAAAAAAAAAAcQAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAcAAAAAAAAABwAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					5,
+					2,
+					"left_delete",
+					null,
+					"AgAAAHAAAAAAAAAAcAAAAAAAAAABAAAAIG8AAAAAAAAAbwAAAAAAAAABAAAAKg",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAcQAAAAAAAABxAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					6,
+					1,
+					"insert",
+					{
+						"characters": "Lea"
+					},
+					"AwAAAG8AAAAAAAAAcAAAAAAAAAAAAAAAcAAAAAAAAABxAAAAAAAAAAAAAABxAAAAAAAAAHIAAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAbwAAAAAAAABvAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					7,
+					1,
+					"left_delete",
+					null,
+					"AQAAAHEAAAAAAAAAcQAAAAAAAAABAAAAYQ",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAcgAAAAAAAAByAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					8,
+					1,
+					"insert",
+					{
+						"characters": "onardo"
+					},
+					"BgAAAHEAAAAAAAAAcgAAAAAAAAAAAAAAcgAAAAAAAABzAAAAAAAAAAAAAABzAAAAAAAAAHQAAAAAAAAAAAAAAHQAAAAAAAAAdQAAAAAAAAAAAAAAdQAAAAAAAAB2AAAAAAAAAAAAAAB2AAAAAAAAAHcAAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAcQAAAAAAAABxAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					9,
+					1,
+					"insert",
+					{
+						"characters": " A."
+					},
+					"AwAAAHcAAAAAAAAAeAAAAAAAAAAAAAAAeAAAAAAAAAB5AAAAAAAAAAAAAAB5AAAAAAAAAHoAAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAdwAAAAAAAAB3AAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					10,
+					1,
+					"insert",
+					{
+						"characters": " Saravia"
+					},
+					"CAAAAHoAAAAAAAAAewAAAAAAAAAAAAAAewAAAAAAAAB8AAAAAAAAAAAAAAB8AAAAAAAAAH0AAAAAAAAAAAAAAH0AAAAAAAAAfgAAAAAAAAAAAAAAfgAAAAAAAAB/AAAAAAAAAAAAAAB/AAAAAAAAAIAAAAAAAAAAAAAAAIAAAAAAAAAAgQAAAAAAAAAAAAAAgQAAAAAAAACCAAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAegAAAAAAAAB6AAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					11,
+					1,
+					"insert",
+					{
+						"characters": ","
+					},
+					"AQAAAIIAAAAAAAAAgwAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAggAAAAAAAACCAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					12,
+					1,
+					"insert",
+					{
+						"characters": " Ulis"
+					},
+					"BQAAAIMAAAAAAAAAhAAAAAAAAAAAAAAAhAAAAAAAAACFAAAAAAAAAAAAAACFAAAAAAAAAIYAAAAAAAAAAAAAAIYAAAAAAAAAhwAAAAAAAAAAAAAAhwAAAAAAAACIAAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAgwAAAAAAAACDAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					13,
+					1,
+					"insert",
+					{
+						"characters": "es"
+					},
+					"AgAAAIgAAAAAAAAAiQAAAAAAAAAAAAAAiQAAAAAAAACKAAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAiAAAAAAAAACIAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					14,
+					1,
+					"insert",
+					{
+						"characters": " Balza."
+					},
+					"BwAAAIoAAAAAAAAAiwAAAAAAAAAAAAAAiwAAAAAAAACMAAAAAAAAAAAAAACMAAAAAAAAAI0AAAAAAAAAAAAAAI0AAAAAAAAAjgAAAAAAAAAAAAAAjgAAAAAAAACPAAAAAAAAAAAAAACPAAAAAAAAAJAAAAAAAAAAAAAAAJAAAAAAAAAAkQAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAigAAAAAAAACKAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					18,
+					1,
+					"left_delete",
+					null,
+					"AQAAAJAAAAAAAAAAkAAAAAAAAAABAAAALg",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAkQAAAAAAAACRAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					19,
+					1,
+					"insert",
+					{
+						"characters": ","
+					},
+					"AQAAAJAAAAAAAAAAkQAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAkAAAAAAAAACQAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					20,
+					1,
+					"insert",
+					{
+						"characters": " Fernando"
+					},
+					"CQAAAJEAAAAAAAAAkgAAAAAAAAAAAAAAkgAAAAAAAACTAAAAAAAAAAAAAACTAAAAAAAAAJQAAAAAAAAAAAAAAJQAAAAAAAAAlQAAAAAAAAAAAAAAlQAAAAAAAACWAAAAAAAAAAAAAACWAAAAAAAAAJcAAAAAAAAAAAAAAJcAAAAAAAAAmAAAAAAAAAAAAAAAmAAAAAAAAACZAAAAAAAAAAAAAACZAAAAAAAAAJoAAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAkQAAAAAAAACRAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					21,
+					1,
+					"insert",
+					{
+						"characters": " Momo?"
+					},
+					"BgAAAJoAAAAAAAAAmwAAAAAAAAAAAAAAmwAAAAAAAACcAAAAAAAAAAAAAACcAAAAAAAAAJ0AAAAAAAAAAAAAAJ0AAAAAAAAAngAAAAAAAAAAAAAAngAAAAAAAACfAAAAAAAAAAAAAACfAAAAAAAAAKAAAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAmgAAAAAAAACaAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					22,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAKAAAAAAAAAAoQAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAoAAAAAAAAACgAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					23,
+					1,
+					"left_delete",
+					null,
+					"AQAAAKAAAAAAAAAAoAAAAAAAAAABAAAAIA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAoQAAAAAAAAChAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					24,
+					1,
+					"insert",
+					{
+						"characters": ","
+					},
+					"AQAAAKAAAAAAAAAAoQAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAoAAAAAAAAACgAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					25,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAKEAAAAAAAAAogAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAoQAAAAAAAAChAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					26,
+					1,
+					"paste",
+					null,
+					"AQAAAKIAAAAAAAAAtAAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAogAAAAAAAACiAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					27,
+					1,
+					"insert",
+					{
+						"characters": "<."
+					},
+					"AgAAALQAAAAAAAAAtQAAAAAAAAAAAAAAtQAAAAAAAAC2AAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAtAAAAAAAAAC0AAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					28,
+					1,
+					"left_delete",
+					null,
+					"AQAAALUAAAAAAAAAtQAAAAAAAAABAAAALg",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAtgAAAAAAAAC2AAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					29,
+					1,
+					"insert",
+					{
+						"characters": ">"
+					},
+					"AQAAALUAAAAAAAAAtgAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAtQAAAAAAAAC1AAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					35,
+					1,
+					"paste",
+					null,
+					"AQAAALUAAAAAAAAAyAAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAtQAAAAAAAAC1AAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					37,
+					1,
+					"insert",
+					{
+						"characters": " ?"
+					},
+					"AgAAAMkAAAAAAAAAygAAAAAAAAAAAAAAygAAAAAAAADLAAAAAAAAAAAAAAA",
+					"BwAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAyQAAAAAAAADJAAAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		},
+		{
+			"file": "/home/leonardo/Dropbox/Collaborations/NetworkGolfoSanJorge/TopologicalAnalysis.Rmd",
+			"settings":
+			{
+				"buffer_size": 20812,
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+			]
+		},
+		{
+			"file": "/home/leonardo/Dropbox/Collaborations/NetworkGolfoSanJorge/.gitignore",
+			"settings":
+			{
+				"buffer_size": 86,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "notes.md",
+			"settings":
+			{
+				"buffer_size": 13417,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"synr",
+				"Set Syntax: R"
+			],
+			[
+				"tab",
+				"Table Editor: Enable for current view"
+			],
+			[
+				"con",
+				"Package Control: Install Package"
+			],
+			[
+				"syr",
+				"Set Syntax: R"
+			],
+			[
+				"te s",
+				"Table Editor: Set table syntax 'Simple' for current view"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"synR",
+				"Set Syntax: R"
+			],
+			[
+				"synpn",
+				"Set Syntax: Pandoc"
+			],
+			[
+				"sym",
+				"Set Syntax: Makefile"
+			],
+			[
+				"ma",
+				"Markdown Preview: Python Markdown: Preview in Browser"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"syp",
+				"Set Syntax: Pandoc"
+			],
+			[
+				"syR",
+				"Set Syntax: R"
+			],
+			[
+				"r",
+				"Rot13 Selection"
+			],
+			[
+				"sy",
+				"Set Syntax: Pandoc"
+			],
+			[
+				"synp",
+				"Set Syntax: Pandoc"
+			],
+			[
+				"syn",
+				"Set Syntax: Pandoc"
+			],
+			[
+				"Snippet: ",
+				"Snippet: Add eta-squared abbreviation based n LaTeX definition"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"previ",
+				"Markdown Preview: preview in Browser"
+			],
+			[
+				"mark",
+				"Markdown Preview: open Markdown Cheat sheet"
+			],
+			[
+				"prev",
+				"Markdown Preview: preview in Browser"
+			],
+			[
+				"contr",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 602.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/leonardo/Dropbox/Projects/multiSLOSS/.gitignore",
+		"/home/leonardo/Dropbox/Projects/MetaWebsAssembly/JAE_review3.md",
+		"/home/leonardo/Dropbox/Revisiones/revistammsb/review_msb_2021.md",
+		"/home/leonardo/Academicos/GitProjects/MacroalgalModel/ALB Estimations/Data/PAR/icedays_data.txt",
+		"/home/leonardo/Academicos/GitProjects/MacroalgalModel/ALB Estimations/Data/PAR/MERRA Ice Cover.Rmd",
+		"/home/leonardo/Academicos/GitProjects/MacroalgalModel/ALB Estimations/Data/PAR/ice_cover_days.txt",
+		"/home/leonardo/Dropbox/Revisiones/revistammsb/revision2021.md",
+		"/home/leonardo/Dropbox/Revisiones/JTB2020/reviewJTB2020.md",
+		"/home/leonardo/Dropbox/Revisiones/Oikos2018/revision.md",
+		"/home/leonardo/Dropbox/Revisiones/PeerJ2018/revision.md",
+		"/home/leonardo/.cache/.fr-Uwh4Oc/experiment_setups/100.nlogo",
+		"/home/leonardo/.cache/.fr-XqQCO9/experiment_setups/99.nlogo",
+		"/home/leonardo/.cache/.fr-Pooqic/experiment_setups/100.nlogo",
+		"/home/leonardo/.cache/.fr-5xcy8c/experiment_setups/1.nlogo",
+		"/home/leonardo/Academicos/GitProjects/Networks/NetworkComplexity/Fluxweb_Potter.Rmd",
+		"/home/leonardo/Academicos/GitProjects/Networks/FluxesInteractionStrengths/Data/fluxweb/traits.txt",
+		"/home/leonardo/Dropbox/Projects/DynamicForestExtinction/AmazonEmpirical.md",
+		"/home/leonardo/Dropbox/Projects/DynamicForestExtinction/DynCritTrans.Rmd",
+		"/home/leonardo/Dropbox/Projects/DynamicForestExtinction/results.md",
+		"/home/leonardo/Dropbox/Projects/DynamicForestExtinction/notes.md",
+		"/home/leonardo/Dropbox/Projects/DynamicForestExtinction/SLOSS.Rmd",
+		"/home/leonardo/Academicos/GitProjects/Networks/AntarcticFoodWeb/notes.md",
+		"/home/leonardo/Academicos/GitProjects/Networks/AntarcticFoodWeb/Draft.txt",
+		"/home/leonardo/Academicos/GitProjects/Manticore/README.md",
+		"/home/leonardo/Academicos/GitProjects/LongTermPKP/README.md",
+		"/home/leonardo/Academicos/GitProjects/LongTermPKP/Analysis_01.Rmd",
+		"/home/leonardo/Academicos/GitProjects/LongTermPKP/Notes.md",
+		"/home/leonardo/Academicos/GitProjects/pollinatorsNL/plant_parameters.csv",
+		"/home/leonardo/Dropbox/CV/cv2020.md",
+		"/home/leonardo/Dropbox/CV/cv2020_en.md",
+		"/home/leonardo/Academicos/GitProjects/Networks/SoilBodySizeSpectra/Data/body_size.txt",
+		"/home/leonardo/Academicos/GitProjects/pollinatorsNL/plant_parametersEx1.csv",
+		"/home/leonardo/.config/sublime-text-3/Packages/Table Editor/Default (Linux).sublime-keymap",
+		"/home/leonardo/.config/sublime-text-3/Packages/Table Editor/README.md",
+		"/home/leonardo/Dropbox/Projects/MetaWebsAssembly/MetawebsAssembly_old.md",
+		"/home/leonardo/Dropbox/Projects/GlobalFireTippingPoints/Data/Predicted_bF_rcp45.csv",
+		"/home/leonardo/Dropbox/Projects/GlobalFireTippingPoints/Data/Predicted_bF_rcp85.csv",
+		"/home/leonardo/Academicos/GitProjects/fireNL/Data/Predicted_bF_rcp45.csv",
+		"/home/leonardo/Academicos/GitProjects/fireNL/Data/Estimated_bF.csv",
+		"/home/leonardo/Dropbox/Projects/MetaWebsAssembly/Data/metaweb_SW_trophic.txt",
+		"/home/leonardo/Dropbox/Projects/MetaWebsAssembly/Data/presence_SW_trophic.txt",
+		"/home/leonardo/Downloads/metaweb_SW_trophic.txt",
+		"/home/leonardo/Downloads/presence_SW_trophic.txt",
+		"/home/leonardo/Dropbox/Projects/MetaWebsAssembly/MetawebsAssembly.md",
+		"/home/leonardo/Dropbox/Projects/MetaWebsAssembly/MetawebsAssembly_LAS.md",
+		"/home/leonardo/.gitconfig",
+		"/home/leonardo/Dropbox/Projects/GlobalFireTippingPoints/results.Rmd",
+		"/home/leonardo/Dropbox/Projects/GlobalFireTippingPoints/Data/GDPP_rcp45_Amazon.csv",
+		"/home/leonardo/Dropbox/Projects/GlobalFireTippingPoints/Data/TerraClimatePrNABorealForest.csv",
+		"/home/leonardo/Dropbox/Projects/AustraliaTippingPoint/Notes.md",
+		"/home/leonardo/Academicos/GitProjects/fireNL/Notes.md",
+		"/home/leonardo/Exported Items.bib",
+		"/home/leonardo/Dropbox/Collaborations/NetworkGolfoSanJorge/Notes.md",
+		"/home/leonardo/Academicos/GitProjects/NuevoProyecto/analisisdedatos.Rmd",
+		"/home/leonardo/Academicos/GitProjects/pollinatorsNL/Read_behaviorspace_sim.Rmd",
+		"/home/leonardo/Dropbox/Projects/MetaWebsAssembly/notes.txt",
+		"/home/leonardo/Downloads/mean.values_dataLiam.csv",
+		"/home/leonardo/Dropbox/Projects/GlobalFireTippingPoints/Notes.md",
+		"/home/leonardo/Exported Items1.bib",
+		"/home/leonardo/Exported Items2.bib",
+		"/home/leonardo/Academicos/GitProjects/pollinatorsNL/read_analyse_NL_simulations_01092021.R",
+		"/home/leonardo/Academicos/GitProjects/pollinatorsNL/pollinator_parameters.csv",
+		"/home/leonardo/Academicos/GitProjects/fireNL/README.md",
+		"/home/leonardo/Academicos/GitProjects/fireNL/DynamicFireAnalysis.Rmd",
+		"/home/leonardo/Academicos/GitProjects/fireNL/DynamicFireForestAnalysis.Rmd",
+		"/home/leonardo/Dropbox/Projects/GlobalFireTippingPoints/presentationWSC.Rmd",
+		"/home/leonardo/Academicos/GitProjects/pollinatorsNL/Fractal_landscapes.md",
+		"/home/leonardo/Dropbox/Cursos/ABMCourse/vacasypasto1_FacBusq.nlogo",
+		"/home/leonardo/Dropbox/Projects/MetaWebsAssembly/JAE_review_reply.md",
+		"/home/leonardo/Academicos/GitProjects/pollinatorsNL/pollinator_parameters_02.csv",
+		"/home/leonardo/Dropbox/Collaborations/NetworkGolfoSanJorge/Red_GSJ2711.md",
+		"/home/leonardo/Downloads/Red_GSJ2711.md",
+		"/home/leonardo/Dropbox/Collaborations/CoastCarb/Talk_Padova.Rmd",
+		"/home/leonardo/Dropbox/CV/CIC2021/FormulaDeIntensidadDeInteracion.md",
+		"/home/leonardo/Downloads/dataset_viajes_sube.csv",
+		"/home/leonardo/Dropbox/Projects/MetaWebsAssembly/FiguresTables.md",
+		"/home/leonardo/Dropbox/Projects/MetaWebsAssembly/MetawebsAssembly_NPK.md",
+		"/home/leonardo/Dropbox/Projects/MetaWebsAssembly/Appendices.md",
+		"/home/leonardo/Downloads/plot_script.py",
+		"/home/leonardo/Academicos/GitProjects/covid19/GraficaMovilidadSUBE.r",
+		"/home/leonardo/Dropbox/Projects/Antarctica/MacroalgalModel/Data/Clark2013/README",
+		"/home/leonardo/Downloads/Figure 3.r",
+		"/home/leonardo/Academicos/GitProjects/proyecciones/index.Rmd",
+		"/home/leonardo/Academicos/GitProjects/covid19/coronavirus.r",
+		"/home/leonardo/Downloads/README",
+		"/home/leonardo/Dropbox/Projects/MetaWebsAssembly/MetawebsAssembly_NPKLAS.md",
+		"/home/leonardo/Downloads/motifs.csv",
+		"/home/leonardo/Academicos/GitProjects/MacroalgalModel/Data/CompensationPointDB.txt",
+		"/home/leonardo/Dropbox/CV/CIC2021/Proyecto_CONICET_2021.md",
+		"/home/leonardo/Downloads/import csv file into NL",
+		"/home/leonardo/Downloads/pollinator_parameters.csv",
+		"/home/leonardo/Academicos/GitProjects/Networks/NetworkComplexity/Topology_PotterBeagle.Rmd",
+		"/home/leonardo/Academicos/GitProjects/Networks/NetworkComplexity/R/dist_fun.r",
+		"/home/leonardo/Academicos/GitProjects/MacroalgalModel/Data/coverageDB.txt",
+		"/home/leonardo/Academicos/CompletedProjects/FoodWebSmallWorld/R/dist_fun.r",
+		"/home/leonardo/Academicos/GitProjects/logisticNL/buterflies.nlogo",
+		"/home/leonardo/Academicos/GitProjects/pollinatorsNL/output.txt",
+		"/home/leonardo/Dropbox/Projects/multiweb/R/calcFunctionalIndices.r",
+		"/home/leonardo/Dropbox/Projects/MetaWebsAssembly/Notes.md",
+		"/home/leonardo/Dropbox/Projects/MetaWebsAssembly/CharlaBES/SpeechTalkBES.txt",
+		"/home/leonardo/Dropbox/Projects/MetaWebsAssembly/CharlaBES/BESTalk.Rmd",
+		"/home/leonardo/Dropbox/CV/ImperialCollege2021_motivation.md",
+		"/home/leonardo/Dropbox/CV/makefile",
+		"/home/leonardo/Dropbox/CV/PostDocPresentations/ImperialCollege2021_motivation.md",
+		"/home/leonardo/Dropbox/Projects/DynamicForestExtinction/ContactProcessForestAsTurtlesSelectionRadius.nlogo",
+		"/home/leonardo/Dropbox/Cursos/ABMCourse/vacasypasto.nlogo",
+		"/home/leonardo/Dropbox/CV/PostDocPresentations/EHA_LeonardoSaravia.md",
+		"/home/leonardo/Downloads/MetawebsAssembly_ND.md",
+		"/home/leonardo/Dropbox/Cursos/ABMCourse/levaduras.nlogo",
+		"/home/leonardo/Dropbox/Projects/MetaWebsAssembly/narrative.md",
+		"/home/leonardo/Dropbox/LabBiologia/PICT2017/DescripcionTecnicaPICT2021.md",
+		"/home/leonardo/Dropbox/Projects/TheLawsOfEcology/README.md",
+		"/home/leonardo/Dropbox/Projects/GlobalFireTippingPoints/AustraliaTippingPoint.md",
+		"/home/leonardo/Academicos/GitProjects/ToxicBlooms/README.md",
+		"/home/leonardo/Academicos/GitProjects/ToxicBlooms/LICENSE",
+		"/home/leonardo/Dropbox/Projects/GlobalFireTippingPoints/ClusterSizeDistribution.md",
+		"/home/leonardo/Academicos/GitProjects/FANS/detoxificacion03.R",
+		"/home/leonardo/Dropbox/LabBiologia/PICT2017/DescripcionTecnicaPICT2019.md",
+		"/home/leonardo/Academicos/GitProjects/FANS/detoxificacion02.R",
+		"/home/leonardo/Academicos/GitProjects/Networks/WeddellSea/ModellingWeddellSea.Rmd",
+		"/home/leonardo/Academicos/GitProjects/Networks/WeddellSea/notes.md",
+		"/home/leonardo/Dropbox/Projects/ariadnaNL/NotesCovid19.md",
+		"/home/leonardo/Dropbox/Pandoc/Git_commands.md",
+		"/home/leonardo/Academicos/GitProjects/Networks/Herramientas/Data/data.txt",
+		"/home/leonardo/Academicos/GitProjects/Networks/NetworkComplexity/Plot_Topology.Rmd",
+		"/home/leonardo/Dropbox/Revisiones/EcolMod2021/revision.md",
+		"/home/leonardo/Academicos/GitProjects/Networks/Herramientas/ejemplo.r",
+		"/home/leonardo/Downloads/EcoIndicators/Data/com.txt"
+	],
+	"find":
+	{
+		"height": 40.0
+	},
+	"find_in_files":
+	{
+		"height": 101.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "SLOSS.Rmd",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19625,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/R/R.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9739,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Pandoc Academic/Syntax/pandoc.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/leonardo/Dropbox/Collaborations/NetworkGolfoSanJorge/TopologicalAnalysis.Rmd",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 20812,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								269,
+								269
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 0,
+								"count": 778,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/leonardo/Dropbox/Collaborations/NetworkGolfoSanJorge/.gitignore",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 86,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								86,
+								49
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 0,
+								"count": 5,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"syntax": "Packages/Git Formats/Git Ignore.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "notes.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13417,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Pandoc Academic/Syntax/pandoc.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 173.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Makefile/Make.sublime-build",
+	"project": "multiSLOSS.sublime-project",
+	"replace":
+	{
+		"height": 54.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ggplot",
+				"~/Academicos/GitProjects/LongTermPKP/Data/LongTerm_Meteo.dat"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Dropbox/Projects/AmazonFireTippingPoints/AmazonFireTippingPoints.sublime-project"
+			],
+			[
+				"clase",
+				"~/Dropbox/LabBiologia/LOF/clases.sublime-project"
+			],
+			[
+				"ar",
+				"~/Academicos/GitProjects/ariadna/ariadna.sublime-project"
+			],
+			[
+				"cv",
+				"~/Dropbox/CV/cv.sublime-project"
+			],
+			[
+				"vc",
+				"/home/leonardo/Dropbox/CV/cv.sublime-project"
+			],
+			[
+				"cla",
+				"/home/leonardo/Dropbox/LabBiologia/LOF/clases.sublime-project"
+			],
+			[
+				"syr",
+				"/home/leonardo/Dropbox/Projects/PotterCove/FoodWebStability/FoodWebStability.sublime-project"
+			],
+			[
+				"ung",
+				"/home/leonardo/Dropbox/LabBiologia/UNGS2018/ungs2018.sublime-project"
+			],
+			[
+				"nu",
+				"/home/leonardo/Dropbox/Projects/IndicSuelo/NullModels/WormsInteractions.sublime-project"
+			],
+			[
+				"cg",
+				"/home/leonardo/Dropbox/Projects/CriticalGlobalForest/CriticalGF.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

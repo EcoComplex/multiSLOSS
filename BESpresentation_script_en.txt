@@ -1,0 +1,119 @@
+Hello, I'm Leonardo Saravia
+from University of General Sarmiento, 
+Buenos Aires, Argentina.
+
+I will talk about SLOSS. Several large or Single small
+which is better for conservation? 
+
+So this is an old
+and tangled debate. 
+
+Here are some of the last papers
+about this and everybody agree that habitat loss is a threat but 
+
+On one side this people
+think that to have one bigger patch is better
+
+On the other, L. Fahrig
+thinks that several small
+patches are better. 
+
+Then I applied a neutral - hierarchical competitive
+model
+
+So we have two flavors. 
+
+The neutral one is a classical neutral model
+with a metacommunity. 
+
+Individuals migrate from the metacommunity
+to a local community and here we have two
+
+parameters the birth and death rate
+that can be combined in one called lambda
+
+All species have
+the same parameters. You can think that all species are equal to an average species.
+
+So species
+migrate and they can disperse locally. 
+
+They have a dispersal distance and when they 
+disperse if the site is occupied or degraded they die.
+
+So there is an increased mortality.
+
+And in the hierarchical side we
+have another parameter that is 
+the replacement rate. 
+
+So species are not anymore the same. So
+a more competitive species can replace another species.
+
+In the model there is a hierarchy: the best species can replace all others
+the second best can replace all except the first, and so on.
+
+Finally we have an additional flavor that
+is the same that the classical neutral
+
+one with the addition
+that the dispersers can select sites, if the
+site is occupied they select a
+neighbor empty or not degrade site
+so there is no additional mortality.  
+
+In this case I'm trying to simulate the behavior of animals that have
+the possibility to select the
+site when they disperse. 
+
+So, what happen without habit of loss,
+the general pattern is that we have less species with more
+dispersal distance because when we
+have larger dispersal there is an increased probability that one
+species dominate the area
+
+So we did fragmentation experiments like this 
+we let the community to migrate and
+colonize the area and then 
+we degraded the 60% of the area 
+this is the case of lambda = 2 
+then we record how many species we have left
+
+We found that with bigger patch sizes
+we have less species and the
+effect is more pronounced
+when dispersal distance is smaller
+
+
+We also observed that there is 
+a minimum patch size for survival
+for a very small patch size species can't
+survive 
+
+In this example we observe here that for
+very small patches 
+the individuals of all species get locally extinct. 
+
+We also calculate Shannon
+diversity to see if the
+patterns are similar and they are
+
+Our main results agree
+with Fahrig, but there is a
+minimum patch size that depends
+
+on lambda and after that
+threshold the increase in
+patch size produces a 
+decrease in number of species
+
+why 
+
+because fragmentation acts as a
+barrier to dispersal and as we see in the simulations without 
+fragmentation the increase in dispersal implies less species.
+
+okay. I think it's all thank you very much. 
+See you around.
+
+

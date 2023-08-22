@@ -37,10 +37,14 @@ read_netlogo_simul <- function(fname,skip=6){
 
 
 read_sloss_simul <- function(outpath,fname){
-  mdl <- read_netlogo_simul(file.path(outpath,fname),skip=0) %>% 
-  mutate(mean_free_path=str_sub(mean_free_path,2,-2)) %>% 
-  separate(mean_free_path, c("non_degraded_mfp","degraded_mfp"), sep=" ",convert=TRUE) %>% rowwise() %>%
-  mutate(netlogo_evaluate_patch_distr(find_cluster_sizes))
+  mdl <- read_netlogo_simul(file.path(outpath,fname),skip=0)
+  if( "mean_free_path" %in% names(mdl)) {
+    mdl <- mdl %>% 
+    mutate(mean_free_path=str_sub(mean_free_path,2,-2)) %>% 
+    separate(mean_free_path, c("non_degraded_mfp","degraded_mfp"), sep=" ",convert=TRUE) %>% rowwise() %>%
+    mutate(netlogo_evaluate_patch_distr(find_cluster_sizes))
+  } 
+  return(mdl)
 }
 
 #' Estimate the critical point of species living inside and habitat (birds inside forest) 

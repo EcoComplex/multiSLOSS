@@ -1,0 +1,215 @@
+---
+title: "Why there are more species in several small patches vs few large patches: a multi-species modeling approach"
+subtitle: ""
+author:
+- Leonardo A. Saravia, [Universidad Nacional De General Sarmiento]
+date: "2021/07/06"
+output:
+  xaringan::moon_reader:
+    css:
+      - default-fonts
+      - css/leo.css
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: true
+      countdown: 60000
+---
+
+```{r xaringan-scribble, echo=FALSE}
+xaringanExtra::use_scribble()
+#xaringanExtra::use_webcam()
+```
+class:  center, middle
+
+# SLOSS
+
+## is it better to have Several Small or Single Large habitat for conservation? 
+
+
+---
+
+background-image: url(Figures/Fletcher2019.png)
+background-size: contain
+
+## On one side
+
+---
+
+background-image: url(Figures/Fahrig2020.png)
+background-size: contain
+
+## On the other 
+
+---
+background-image: url(Figures/Saravia2018.png)
+background-size: contain
+
+## A Neutral - hierarchical model 
+
+---
+
+background-image: url(Figures/NeutralHier00.jpeg)
+background-size: contain
+
+## The Neutral side 
+
+---
+
+background-image: url(Figures/NeutralHier01.jpeg)
+background-size: contain
+
+## The Neutral side
+
+
+---
+background-image: url(Figures/NeutralHier02.jpeg)
+background-size: contain
+
+## The Neutral side
+
+---
+background-image: url(Figures/NeutralHier03.jpeg)
+background-size: contain
+
+## The Hierarchical side
+
+---
+background-image: url(Figures/NeutralHier04.jpeg)
+background-size: contain
+
+## An additional Neutral flavor 
+
+---
+
+## What happens without habitat loss
+
+.center[
+<img src="Figures/Species_NoFrag_Dispersal_Lambda.png" width="90%">
+]
+
+???
+
+The general pattern is that with more dispersal there are less species 
+for smaller lambda (1.5 is near the extinction threshold) the increase in
+dispersal produces and increase in survival 
+
+So with more dispersal there is a bigger probabilty for one species to dominate
+
+---
+
+class:  center, middle
+
+## A Fragmentation experiment 
+
+<video width="500" height="500">
+<source src="NeutralNoSel_200x200_lambda2_disp3_patch30_noMigrat.mp4" type="video/mp4">
+</video>
+
+
+---
+## Fragmentation - Number of species
+
+.center[
+<img src="Figures/Species_PatchSize_Dispersal_Migration.png" width="90%">
+]
+
+---
+class:  center, middle
+
+## The minimum patch size  
+
+<video width="500" height="500">
+<source src="NeutralNoSel_200x200_lambda2_disp3_patch3_noMigrat.mp4" type="video/mp4">
+</video>
+
+
+---
+
+## Fragmentation - Shannon Diversity
+
+.center[
+<img src="Figures/Shannon_PatchSize_Dispersal_Migration.png" width="90%">
+]
+
+---
+
+## Model results agree with Fahrig
+
+--
+### There is a minimum patch size that depends on lambda
+
+--
+### After that threshold fragmentation increase diversity
+
+--
+# why?
+
+--
+
+## Because fragmentation acts as a barrier to dispersal 
+
+
+---
+
+## Model predictions
+
+--
+### For communities with a smaller average dispersal distance framgmentation will have strong positive effect
+
+--
+### For communities with a bigger average dispersal distance fragmentation will have no effect
+
+--
+### To my knowledge there is no experiment relating fragmentation to dispersal distance.
+
+???
+
+Prediction can be compared with experiments
+
+---
+## How to translate this to complex patch configurations
+
+### The mean free habitat path (HP)
+
+The mean distance from a random place inside the habitat to reach the degraded area
+
+### The mean free degraded path (DP) 
+
+The mean distance from a random place inside the degraded area to reach the habitat
+
+### HP and DP in relation to mean dispersal distance (DD)
+
+???
+
+These fragmentation patterns are delivertely simple so in real cases we need to have more operational 
+parameters 
+
+---
+background-image: url(Figures/FreePathDispersal01.jpeg)
+background-size: contain
+
+## A connected landscape - lower no. species
+
+
+---
+background-image: url(Figures/FreePathDispersal02.jpeg)
+background-size: contain
+
+## A less connected landscape - Higher no. species
+
+
+---
+background-image: url(Figures/FreePathDispersal03.jpeg)
+background-size: contain
+
+## The ideal fragmented landscape 
+
+
+---
+
+
+
+class: center, middle
+
+# THE END
