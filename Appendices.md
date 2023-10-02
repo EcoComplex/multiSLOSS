@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Appendices - Supplementary Information
 
 ![Relationship between number of species and habitat patch size for varying dispersal distances and growth rate parameters. Simulations were performed using a neutral model with a constant migration rate (0.0001). Following 200 time steps of the model, 60% of the habitat was destroyed, rendering it unavailable for the species. The destruction of habitat resulted in the formation of regular patterns, where all remaining patches exhibited equal sizes. ](Figures/Species_Habitat_Dispersal_Lambda_regular.png)
