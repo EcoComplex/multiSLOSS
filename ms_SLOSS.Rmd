@@ -21,7 +21,7 @@ As global biodiversity is rapidly declining due to habitat loss, it is important
 
 ## Introduction 
 
-Global biodiversity is rapidly declining due to habitat loss (quotes). Moreover, habitat fragmentation occurs at the same time as habitat loss, and the effects of both processes are difficult to disentangle. Landscape connectivity and organism mobility as a critical feature for population persistence [@Taylor1993]. Starting from a landmark paper [@Diamond1975], conservation biologists engaged in the challenging task of recommending protection measures given the environmental crisis coupled with a lack of knowledge of most of the world’s biodiversity. Early recommendations claimed to follow ecological theory, in particular island biogeography theory to derive simple thumb rules decisions to better design protected areas. However, as noted rapidly, species/area relationships do not have a clear association with fragmentation per se but only with overall habitat loss [@Simberloff1982].
+Global biodiversity is rapidly declining due to habitat loss [@Young2016;@Chase2020;@Newbold2015]. Moreover, habitat fragmentation occurs at the same time as habitat loss, and the effects of both processes are difficult to disentangle [@Haddad2015]. Landscape connectivity and organism mobility are a critical feature for population persistence [@Taylor1993]. Starting from a landmark paper [@Diamond1975], conservation biologists engaged in the challenging task of recommending protection measures given the environmental crisis coupled with a lack of knowledge of most of the world’s biodiversity. Early recommendations claimed to follow ecological theory, in particular island biogeography theory to derive simple thumb rules decisions to better design protected areas. However, as noted rapidly, species/area relationships do not have a clear association with fragmentation per se but only with overall habitat loss [@Simberloff1982].
 Aiming to design better management practices, this has led to a nearly 50-year Single Large vs Several Small (SLOSS) debate. While some authors argue that habitat loss is the most overwhelming effect on species loss, for others the complex factors arising from fragmentation further enhance species extinctions [@Fahrig2017;@Fletcher2018].  
 
 The SLOSS debate has been an important academic and practical discussion in conservation biology. In practice, a series of decision-maker targeted recommendations were proposed and remain rather uncritically in several conservation instances (quotes).
@@ -35,11 +35,11 @@ The aim of this work is to explore spatial multi-species models to verify the SS
 
 ### Model
 
-The model represents a landscape occupied by multiple bird species that undergoes habitat degradation over time. The purpose is to explore the impact of fragmentation patterns and species interaction mechanisms on diversity and abundance distributions.
+The model represents a landscape occupied by multiple species that undergoes habitat degradation over time. The purpose is to explore the impact of fragmentation patterns and species interaction mechanisms on diversity and abundance distributions.
 
-The environment comprises a 2D grid of patches that can be either suitable habitat or degraded. Bird agents have state variables for species identity, size, and colour. Globals contain key parameters.
+The environment comprises a 2D grid of patches that can be either suitable habitat or degraded. Individuals of species have state variables for species identity, size, and colour. Globals contain key parameters.
 
-At initialization, an intact landscape is seeded with bird agents having randomized species identities. Habitat loss occurs probabilistically at a set time step based on three spatial patterns: random, regular fragmentation, or block removal.
+At initialization, an intact landscape is seeded with species having randomized species identities. Habitat loss occurs probabilistically at a given time based on three spatial patterns: random, regular fragmentation, or block removal.
 
 During each time step, the following sequence occurs:
 
@@ -49,8 +49,10 @@ Calculation of probabilities for reproduction, dispersal, migration
 
 Birds undergo probabilistic dispersal and reproduction based on:
 
-Neutral model: Offspring disperse locally based on power law dispersal kernel and settle in any vacant habitat
+Neutral model: Offspring disperse locally based on power law dispersal kernel and settle in any vacant habitat. Two flavours "No Selection" propagules try to move to the distance determined by the dispersal kernel, if propagules fall in an inhabitable or occupied site they die, they maximize dispersal; "Selection" propagules select the from the available sites within the distance determined by dispersal, so propagules maximize survival.
+
 Hierarchical model: Species can displace lower ranked species during dispersal
+
 Immigration allows spontaneous appearance of birds at habitat edges
 
 Data collection on species diversity, abundance, and spatial distribution
@@ -69,6 +71,9 @@ Regular habitat patterns: squares of a range of sizes are distributed regularly 
 Random block habitat patterns: habitat blocks of the same size are randomly distributed over the simulation grid. The sizes are identical to those used for regular habitat simulations. This habitat simulation results in patches that have a minimum size equal to the block size but a maximum size that is bigger, so I characterize this with the maximum patch size. 
 
 ## Results
+
+* With the smallest patch size and gowth rates less than 3 species cannot survive, for the neutral and the hierarchical models. 
+
 
 ![Relationship between the number of species and habitat patch size for varying dispersal distances. Simulations were conducted using a model with 60% habitat destruction and regular habitat patterns, where all habitat patches are of equal size.](Figures/Species_Habitat_Dispersal_Lambda_regular.png)
 
