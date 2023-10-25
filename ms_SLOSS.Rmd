@@ -27,48 +27,59 @@ Aiming to design better management practices, this has led to a nearly 50-year S
 The SLOSS debate has been an important academic and practical discussion in conservation biology. In practice, a series of decision-maker targeted recommendations were proposed and remain rather uncritically in several conservation instances (quotes).
 While the overall habitat loss is widely accepted as a process leading to long-term biodiversity loss (quotes), the proposition that single large reserves retain more species than several small reserves of the same area (SL > SS) remain at a similar hierarchical state, even after several criticisms (reviewed in  @Fahrig2017). Moreover, empirical observational and experimental data shows the predominance of the opposite pattern (SS > SL) ever since the 80s and this fact has been reinforced to this day [@Simberloff1982; @Fahrig2020; @Hammill2020], add more. The actual processes driving to it remain elusive and it is probably multi-causal (quotes). In that scenario, model simulations could produce useful predictions targeting the relevant variables in order to better understand the processes leading to non-intuitive patterns. 
 
-The SLOSS debate has been approached from several theoretical frameworks, but most of them were based on single-species models. Moreover, spatial dimension in several works has been neglected as mere noise around long-term equilibrium dynamics (quotes, but see @Rybicki2013). In that context, spatial-explicit multi-species modelling could be meaningful as several organisms retain dispersal distance and other dispersal-related life traits far consistently among species (quotes).
+The SLOSS debate has been approached from several theoretical frameworks, but most of them were based on single-species models [@Fahrig2021]. Moreover, spatial dimension in several works has been neglected as mere noise around long-term equilibrium dynamics. Recent studies using spatially explicit simulations revealed that while high fragmentation leads to more local extinctions due to the reduced habitat size, at low levels of fragmentation, competitive exclusion is more prevalent, resulting in decreased diversity [@Rybicki2020].  
+
+We considered only one amount of habitat destruction in combination with different community dynamics, taking into account empoverished communities with different dispersal related traits, and different patterns of habitat loss.
+
+<!-- In that context, spatial-explicit multi-species modelling could be meaningful as several organisms retain dispersal distance and other dispersal-related life traits far consistently among species (quotes).-->
 
 The aim of this work is to explore spatial multi-species models to verify the SS > SL pattern and determine the causes of it. In particular, we simulate species retention after different fragmentation scenarios of the same overall habitat loss, therefore accounting for the interacting effects of habitat loss and fragmentation.
 
 ## Methods
 
-### Model
+### A spatial stochastic model
 
-The model represents a landscape occupied by multiple species that undergoes habitat degradation over time. The purpose is to explore the impact of fragmentation patterns and species interaction mechanisms on diversity and abundance distributions.
+We developed a spatially explicit multi-species model to explore the relationship between habitat loss and species preservation. In this model space is discretized into a grid and only one individual of one species can occupy a particular position. Each position represents an area fixed by the investigator to mimic the real system. Time is continuous, so the update of the model is asynchronous. Sites are selected at random and to perform one complete time interval $J$ sites have to be updated, where $J$ is the size of the grid.
 
-The environment comprises a 2D grid of patches that can be either suitable habitat or degraded. Individuals of species have state variables for species identity, size, and colour. Globals contain key parameters.
+We use absorving boundary conditions, which means that if an individual try to disperse outside the grid it dies. The size of the community is given by *J = dimX* x *dimY*, where *dimX* and *dimY* are the dimensions of the grid. Thus *J* is the maximum number of individuals in the simulated area. As in a classical neutral model, there is a metacommunity, i.e. a regional species pool from were species migrate [@Hubbell2001]. All individuals have the same parameters and each species is assigned an indicator number. 
 
-At initialization, an intact landscape is seeded with species having randomized species identities. Habitat loss occurs probabilistically at a given time based on three spatial patterns: random, regular fragmentation, or block removal.
+The model consists of three variations: a classical neutral model, a neutral model with habitat selection, and a competitive hierarchical model.
 
-During each time step, the following sequence occurs:
+The classical neutral variation where propagules (e.g., seeds) disperse passively and cannot actively choose their establishment site. During reproduction events, individuals disperse their propagules blindly to surrounding patches. If a patch is already occupied, the propagule fails to establish, resulting in its death. This variation captures the random dispersal and colonization processes typical of many plant species.
 
-Habitat loss event if scheduled
+The neutral variation with habitat selection where individuals have the ability to actively select suitable habitat patches. In this variation, propagules have the capacity to choose unoccupied patches, ensuring their survival and successful establishment. This modification reflects the influence of habitat availability and selection on species colonization and persistence. By incorporating habitat selection, this variation better captures the ecological processes and behaviors of species that are capable of actively seeking out suitable habitats for reproduction and survival.
 
-Calculation of probabilities for reproduction, dispersal, migration
+The competitive hierarchical variation extends the neutral variation with an additional layer of complexity by incorporating competitive interactions among species. Each species have an indicator number that determines its competitive dominance level, and more dominant species have the ability to replace less dominant ones at a specified replacement rate. This variation captures the influence of species interactions and competitive exclusion on species composition and abundance. It is particularly relevant for understanding communities where competitive interactions play a significant role in shaping species distributions and community structure.
 
-Birds undergo probabilistic dispersal and reproduction based on:
+There following process are included in the model: habitat loss, migration, reproduction, local dispersal, competition and death. After setting initial conditions the following events can happen:
+  
+(1) Habitat loss: the sites are marked as non-habitable, making them unsuitable for occupancy, up to a fixed percentage of degraded habitat. Different degradation scenarios are modeled:
 
-Neutral model: Offspring disperse locally based on power law dispersal kernel and settle in any vacant habitat. Two flavours "No Selection" propagules try to move to the distance determined by the dispersal kernel, if propagules fall in an inhabitable or occupied site they die, they maximize dispersal; "Selection" propagules select the from the available sites within the distance determined by dispersal, so propagules maximize survival.
+  Regular degradation: Habitat is removed so as habitable patches form a regular pattern of squares with side given by an habitat-size parameter. As the percentage of degraded habitat is constant varying the habitat-size parameter results in either few large habitat patches (SL) or several small (SS).
 
-Hierarchical model: Species can displace lower ranked species during dispersal
+  Random block degradation: Habitat square patches of a fixed size (habitat-size parameter) are located at random throughout the landscape. The sizes are identical to those used for regular degradation simulations, but it results in habitat patches that have a minimum size corresponding to the habitat-size  but a maximum size that is bigger, because habitat patches can superpose between them producing a larger patch. Then, I characterize this with the maximum habitat patch size. 
 
-Immigration allows spontaneous appearance of birds at habitat edges
+(2) With $migration-rate$ an individual of a species $i$ can migrate from the metacommunity. A random site on the border of the grid is selected and if it is empty and habitable the site is occupied.
 
-Data collection on species diversity, abundance, and spatial distribution
+(3) All individuals reproduce with $birth-rate$. When an individual reproduces the propagule disperses to the neighborhood with a dispersal kernel. Here we use an inverse power kernel [@Marco2011]:
 
-The model implements stochasticity in multiple processes including dispersal distance, loss patterns, migration, and species selection. Emergent macro-level diversity and abundance patterns result from individual-level bird behaviours.
+  $d(x) =  \frac{\alpha -1}{x_{min}} \left(\frac{x}{x_{min}} \right)^{-\alpha}$ with $mean =\frac{\alpha-1}{\alpha-2}x_{min}$ where $\alpha > 1$ and $x \ge x_{min}$. 
 
-Key outputs analyzed are species occupancy, diversity indices, abundance distributions, and spatial patterns. Experiments examine the dynamics under varying habitat loss, dispersal, and competition scenarios.
+  where $d(x)$ is the probability that an individual disperses a distance $x$ from the parent. In all cases we used $x_{min} = 1$. We use as parameter the mean $dispersal-distance$. 
 
-* **MultipleContactNeutralMigrat.nlogo** A multiple species neutral/hierarchical model described in with 
-        degraded sites that cannot be colonised
+  What happens to the propagule when arrives to the selected site is determined by the variation of the model simulated:
 
-        <https://github.com/lsaravia/DynamicForestExtinction>
+  a. Classical Neutral: If the target patch is already occupied by a species, the propagule perishes. 
 
-Regular habitat patterns: squares of a range of sizes are distributed regularly over the simulation grid. The side of the squares were 4,20,30,63 sites.
+  b. Neutral with Habitat Selection:  Propagules in this version selectively target unoccupied patches for reproduction within the distance given by the dispersal kernel, ensuring their survival. 
 
-Random block habitat patterns: habitat blocks of the same size are randomly distributed over the simulation grid. The sizes are identical to those used for regular habitat simulations. This habitat simulation results in patches that have a minimum size equal to the block size but a maximum size that is bigger, so I characterize this with the maximum patch size. 
+  c. Competitive Hierarchical: species are organized based on competitive dominance based on their id number, if the site is occupied by a species with lower id-number is replaced by the propagule.
+
+(4) Individuals die with a $death-rate$ independent of other events. 
+
+For all simulations qwe used a metacommunity of 100 species. The simulations commence with the colonization of an empty habitat area. After 600 time steps fixed amount of 60% habitat is subsequently subjected to destruction, employing regular or random block degradation to mimic habitat fragmentation due to habitat loss.
+
+The Netlogo model source code is available at Github <https://github.com/lsaravia/DynamicForestExtinction> and the R source code to perform simulations and analysis is located at <https://github.com/EcoComplex/multiSLOSS>.
 
 ## Results
 
