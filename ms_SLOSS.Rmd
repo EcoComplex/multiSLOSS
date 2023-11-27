@@ -10,7 +10,7 @@ Leonardo A. Saravia ^1^, Ulises Balza ^1^, Fernando Momo^2^
 
 1. Centro Austral de Investigaciones Científicas (CADIC-CONICET). Houssay 200. Ushuaia, Argentina
 
-2. Instituto de Ciencias. Universidad Nacional de General Sarmiento.        J.M. Gutierrez 1159 (1613), Los Polvorines.        Buenos Aires, Argentina.
+2. Instituto de Ciencias. Universidad Nacional de General Sarmiento. J.M. Gutierrez 1159 (1613), Los Polvorines.        Buenos Aires, Argentina.
         
 
 ## Abstract
@@ -25,15 +25,17 @@ Global biodiversity is rapidly declining due to habitat loss [@Young2016;@Chase2
 Aiming to design better management practices, this has led to a nearly 50-year Single Large vs Several Small (SLOSS) debate. While some authors argue that habitat loss is the most overwhelming effect on species loss, for others the complex factors arising from fragmentation further enhance species extinctions [@Fahrig2017;@Fletcher2018].  
 
 The SLOSS debate has been an important academic and practical discussion in conservation biology. In practice, a series of decision-maker targeted recommendations were proposed and remain rather uncritically in several conservation instances (quotes).
-While the overall habitat loss is widely accepted as a process leading to long-term biodiversity loss (quotes), the proposition that single large reserves retain more species than several small reserves of the same area (SL > SS) remain at a similar hierarchical state, even after several criticisms (reviewed in  @Fahrig2017). Moreover, empirical observational and experimental data shows the predominance of the opposite pattern (SS > SL) ever since the 80s and this fact has been reinforced to this day [@Simberloff1982; @Fahrig2020; @Hammill2020], add more. The actual processes driving to it remain elusive and it is probably multi-causal (quotes). In that scenario, model simulations could produce useful predictions targeting the relevant variables in order to better understand the processes leading to non-intuitive patterns. 
+While the overall habitat loss is widely accepted as a process leading to long-term biodiversity loss [@Keil2015;@Hodgson2011], the proposition that single large reserves retain more species than several small reserves of the same area (SL > SS) remain at a similar hierarchical state, even after several criticisms (reviewed in  @Fahrig2017). Moreover, empirical observational and experimental data shows the predominance of the opposite pattern (SS > SL) ever since the 80s and this fact has been reinforced to this day [@Simberloff1982; @Fahrig2020; @Hammill2020], add more. The actual processes driving to it remain elusive and it is probably multi-causal (quotes). In that scenario, model simulations could produce useful predictions targeting the relevant variables in order to better understand the processes leading to non-intuitive patterns. 
 
 The SLOSS debate has been approached from several theoretical frameworks, but most of them were based on single-species models [@Fahrig2021]. Moreover, spatial dimension in several works has been neglected as mere noise around long-term equilibrium dynamics. Recent studies using spatially explicit simulations revealed that while high fragmentation leads to more local extinctions due to the reduced habitat size, at low levels of fragmentation, competitive exclusion is more prevalent, resulting in decreased diversity [@Rybicki2020].  
 
-We considered only one amount of habitat destruction in combination with different community dynamics, taking into account empoverished communities with different dispersal related traits, and different patterns of habitat loss.
+We considered only one amount of habitat destruction in combination with different community dynamics, neutral and competitive, taking into account healthy and mpoverished communities with different dispersal related traits, and different patterns of habitat loss.
+
+
+The aim of this work is to explore spatial multi-species models to verify the SS > SL pattern and determine the causes of it. In particular, we simulate species retention after different fragmentation scenarios of the same overall habitat loss, therefore accounting for the interacting effects of habitat loss and fragmentation.
 
 <!-- In that context, spatial-explicit multi-species modelling could be meaningful as several organisms retain dispersal distance and other dispersal-related life traits far consistently among species (quotes).-->
 
-The aim of this work is to explore spatial multi-species models to verify the SS > SL pattern and determine the causes of it. In particular, we simulate species retention after different fragmentation scenarios of the same overall habitat loss, therefore accounting for the interacting effects of habitat loss and fragmentation.
 
 ## Methods
 
@@ -55,59 +57,89 @@ There following process are included in the model: habitat loss, migration, repr
   
 (1) Habitat loss: the sites are marked as non-habitable, making them unsuitable for occupancy, up to a fixed percentage of degraded habitat. Different degradation scenarios are modeled:
 
-  Regular degradation: Habitat is removed so as habitable patches form a regular pattern of squares with side given by an habitat-size parameter. As the percentage of degraded habitat is constant varying the habitat-size parameter results in either few large habitat patches (SL) or several small (SS).
+    Regular degradation: Habitat is removed so as habitable patches form a regular pattern of squares with side given by an habitat-size parameter. As the percentage of degraded habitat is constant varying the habitat-size parameter results in either few large habitat patches (SL) or several small (SS).
 
-  Random block degradation: Habitat square patches of a fixed size (habitat-size parameter) are located at random throughout the landscape. The sizes are identical to those used for regular degradation simulations, but it results in habitat patches that have a minimum size corresponding to the habitat-size  but a maximum size that is bigger, because habitat patches can superpose between them producing a larger patch. Then, I characterize this with the maximum habitat patch size. 
+    Random block degradation: Habitat square patches of a fixed size (habitat-size parameter) are located at random throughout the landscape. The sizes are identical to those used for regular degradation simulations, but it results in habitat patches that have a minimum size corresponding to the habitat-size  but a maximum size that is bigger, because habitat patches can superpose between them producing a larger patch. Then, I characterize this with the maximum habitat patch size. 
 
 (2) With $migration-rate$ an individual of a species $i$ can migrate from the metacommunity. A random site on the border of the grid is selected and if it is empty and habitable the site is occupied.
 
 (3) All individuals reproduce with $birth-rate$. When an individual reproduces the propagule disperses to the neighborhood with a dispersal kernel. Here we use an inverse power kernel [@Marco2011]:
 
-  $d(x) =  \frac{\alpha -1}{x_{min}} \left(\frac{x}{x_{min}} \right)^{-\alpha}$ with $mean =\frac{\alpha-1}{\alpha-2}x_{min}$ where $\alpha > 1$ and $x \ge x_{min}$. 
+    $d(x) =  \left(\frac{x}{x_{min}} \right)^{-\alpha}$ with $mean =\frac{\alpha-1}{\alpha-2}x_{min}$ where $\alpha > 1$ and $x \ge x_{min}$. 
 
-  where $d(x)$ is the probability that an individual disperses a distance $x$ from the parent. In all cases we used $x_{min} = 1$. We use as parameter the mean $dispersal-distance$. 
+    where $d(x)$ is the probability that an individual disperses a distance $x$ from the parent. In all cases we used $x_{min} = 1$. We use as parameter the mean $dispersal-distance$. 
 
-  What happens to the propagule when arrives to the selected site is determined by the variation of the model simulated:
+    What happens to the propagule when arrives to the selected site is determined by the variation of the model simulated:
 
-  a. Classical Neutral: If the target patch is already occupied by a species, the propagule perishes. 
+    a. Classical Neutral: If the target patch is already occupied by a species, the propagule perishes. 
 
-  b. Neutral with Habitat Selection:  Propagules in this version selectively target unoccupied patches for reproduction within the distance given by the dispersal kernel, ensuring their survival. 
+    b. Neutral with Habitat Selection:  Propagules in this version selectively target unoccupied patches for reproduction within the distance given by the dispersal kernel, ensuring their survival. 
 
-  c. Competitive Hierarchical: species are organized based on competitive dominance based on their id number, if the site is occupied by a species with lower id-number is replaced by the propagule.
-
+    c. Competitive Hierarchical: Species are ranked by a competitive dominance hierarchy based on their internal identification   (id) number. If a dispersing propagule arrives at an occupied site, it will only establish if its id number is higher than the resident species. Otherwise, the propagule perishes without establishing. This simulates a system where dominant competitor species displace rarer or weaker species through interspecific competition during colonization of new sites. The hierarchy prioritizes species with lower id numbers as stronger competitors.
+    
 (4) Individuals die with a $death-rate$ independent of other events. 
 
-For all simulations qwe used a metacommunity of 100 species. The simulations commence with the colonization of an empty habitat area. After 600 time steps fixed amount of 60% habitat is subsequently subjected to destruction, employing regular or random block degradation to mimic habitat fragmentation due to habitat loss.
+For all simulations we used a metacommunity of 100 species. The simulations commence with the colonization of an empty habitat area. After 600 time steps fixed amount of 60% habitat is subsequently subjected to destruction, employing regular or random block degradation to mimic habitat fragmentation due to habitat loss. <!-- why we don't use completely random degradation patterns -->
+
+The parameters encompass a range of $growth-rates$ while holding the $death-rate$ fixed at 1. In this model, the relationship between these parameters, $\lambda = growth-rate / death-rate$, is the main determinant of the fate of an individual of a species. In similar non-spatial models, this relationship must exceed 1 for a species to persist, but in spatially explicit models the value needs to be higher, around 1.6. Thus we used a minimum $\lambda$ of 1.7, we also fixed the $migration-rate$ at 0.0001. We simulate each model variant using the parameters shown in Table 1. For the neutral classical version only, we also simulate random block habitat patterns.
+
+| $\lambda$ | Dispersal Distance | Habitat Patch size |
+| --------: | ---------:         | ---------:         |
+| 1.7       | 1.1                | 3                  |
+| 2.0       | 1.2                | 9                  |
+| 3.0       | 1.5                | 29                 |
+| 4.0       | 2                  | 61                 |
+|           | 3                  |                    |
+
+Table: Parameter values used in simulations. Factorial combinations of these parameters were used to run simulations. $\lambda$ represents the ratio of growth rate to death rate. "Dispersal distance" refers to the mean of the power law dispersal kernel. "Habitat patch size" indicates the side length of habitat patches modeled as squares.
+
+The classical neutral model and the habitat selection model could represent endpoints on a continuum of models where the matrix is either completely adverse or not adverse but still unsuitable for reproduction. In the habitat selection model, individuals can search across both the matrix and suitable habitat until finding an empty place. In contrast, for the classical neutral model, individuals have limited or no capacity to search, and the matrix is necessarily detrimental because it increases the probability of death by landing on an unsitable site.
 
 The Netlogo model source code is available at Github <https://github.com/lsaravia/DynamicForestExtinction> and the R source code to perform simulations and analysis is located at <https://github.com/EcoComplex/multiSLOSS>.
 
 ## Results
 
-* With the smallest patch size and gowth rates less than 3 species cannot survive, for the neutral and the hierarchical models. 
+
+In our neutral model simulations with a migration rate of \(0.0001\) and regular habitat patterns, species richness varied with habitat patch sizes, influenced by dispersal distance and the \(\lambda\) parameter (Figure 1). Species richness increased with \(\lambda\), with the highest richness at smaller patch sizes for higher \(\lambda\) values. Conversely, a \(\lambda\) of 3 or less showed reduced richness at the smallest patch sizes for lower dispersal distances. The interplay of dispersal distances, habitat sizes, and \(\lambda\) impacts community survival and species richness. This suggests a threshold patch size influenced by these 3 parameters. Extended dispersal distances enhance species survival in scenarios with low \(\lambda\) and smaller patches but reduce richness beyond a certain threshold. Similar patterns are evident for Shannon diversity (Figure 2).
 
 
-![Relationship between the number of species and habitat patch size for varying dispersal distances. Simulations were conducted using a model with 60% habitat destruction and regular habitat patterns, where all habitat patches are of equal size.](Figures/Species_Habitat_Dispersal_Lambda_regular.png)
+![Relationship between number of species and habitat patch size for varying dispersal distances and $\lambda$ parameter (across panels). Simulations were performed using a neutral model with a constant migration rate (0.0001). Following 200 time steps of the model, 60% of the habitat was destroyed, rendering it unavailable for the species. The destruction of habitat resulted in the formation of regular patterns, where all remaining patches exhibited equal sizes.](Figures/Species_Habitat_Dispersal_Lambda_regular.png)
 
-![Relationship between Shannon Diversity and habitat patch size for varying dispersal distances. Simulations were conducted using a model with 60% habitat destruction and regular habitat patterns, where all habitat patches are of equal size.](Figures/Shannon_Habitat_Dispersal_Lambda_regular.png)
+![Relationship between Shannon Diversity and habitat patch size for varying dispersal distances and $\lambda$ parameter (across panels). Simulations were performed using a neutral model with a constant migration rate (0.0001). Following 200 time steps of the model, 60% of the habitat was destroyed, rendering it unavailable for the species. The destruction of habitat resulted in the formation of regular patterns, where all remaining patches exhibited equal sizes.](Figures/Shannon_Habitat_Dispersal_Lambda_regular.png)
 
-![Relationship between the number of species and maximum patch size for varying dispersal distances. Simulations were conducted using a model with 60% habitat destruction and random block habitat patterns, where habitat blocks of the same size are randomly distributed over the simulation grid (i.e., the maximum patch size).](Figures/Species_MaxPatch_Dispersal_Lambda_block.png)
+For the simulations made with random block habitat patterns, the patches do not have the same sizes but there is a distribution with a minimum size determined by the patch-size parameter and a bigger maximum size. Again there is a simimlar pattern with a maximum richness after the threshold for $\lambda$ values less than 3 and for values greater or equal the maximum is at the lower habitat patch size (Figure S1 & S2).
 
-![Relationship between Shannon Diversity and maximum patch size for varying dispersal distances. Simulations were conducted using a model with 60% habitat destruction and random block habitat patterns, where habitat blocks of the same size are randomly distributed over the simulation grid (i.e., the maximum patch size).](Figures/Shannon_MaxPatch_Dispersal_Lambda_block.png)
+![Relationship between number of species and habitat patch size for different versions of the model (across panels) and varying dispersal distances. The neutral is the clasical neutral model, species are equivalent and have the same parameters; in the hierarchical model, species have competitive dominance and more dominant ones can replace the less dominant; the neutral-with-habitat selection model, is a neutral model but propagules search an empty patch so their survival is ensured. Simulations were performed using a fixed growth rate (2), migration and a replacement rate of 0.0001 and 0.3 respectively. Following 200 time steps of the model, 60% of the habitat was destroyed, rendering it unavailable for the species. The destruction of habitat resulted in the formation of regular patterns, where all remaining patches exhibited equal sizes.](Figures/AcrossBehav_Species_Dispersal_Lambda2_regular.png)
+
+![Relationship between Shannon Diversity and habitat patch size for different versions of the model (across panels) and varying dispersal distances. The neutral is the clasical neutral model, species are equivalent and have the same parameters; in the hierarchical model, species have competitive dominance and more dominant ones can replace the less dominant; the neutral-with-habitat selection model, is a neutral model but propagules search an empty patch so their survival is ensured. Simulations were performed using a fixed growth rate (2), migration and a replacement rate of 0.0001 and 0.3 respectively. Following 200 time steps of the model, 60% of the habitat was destroyed, rendering it unavailable for the species. The destruction of habitat resulted in the formation of regular patterns, where all remaining patches exhibited equal sizes.](Figures/AcrossBehav_Shannon_Dispersal_Lambda2_regular.png)
 
 ## Discussion
 
-Overall, our results confirm the previously found pattern and nearly all models retained more species under the SS rather than the SL scenario. In both cases, the loss of species is relevant when habitat loss takes place, and no significant extinction bias towards SS occurs as a long-term dynamic. The extinction of species in patches depends on the quotient between reproduction and extinction rates to patch size, i.e., the ability of a certain patch to be a source of propagules. The only case when SL > SS is when dispersal is not enough to connect patches, and size is smaller than the minimum to prevent patch extinction, as predicted elsewhere [@Rybicki2013]. Letting aside those cases (i.e., not reaching minimum dispersal distance and intra-patch sink dynamics), our model was able to produce the patterns observed so far in field studies [@Fahrig2020]. In that sense, we can hypothesize that our model variables (i.e., dispersal ability, patch size and lambda) may be biologically meaningful and enough to explain why SS retains more species than SL. Importantly, the spatial arrangement of available patches was not necessary to produce the spatial autocorrelation of occupied patches known to be responsible at least in part of the patterns observed in nature [@Fahrig2021]. In contrast, high dispersal rates produce homogenization of species distribution and a reduction of species richness, especially if high dispersal species are also good competitors. In that scenario, SS and SL are approximately equivalent for species diversity retention. The model predicts that if a set of species have more dispersal capabilities the SS effect would be smaller than for species with less dispersal abilities. 
 
-Our model further illustrates that available patches are not always re-occupied following fragmentation even if the minimum size is met, therefore reinforcing the fact that dispersal is the main driver of the pattern, and that chance is involved in the final species pool when fragmentation takes place. Empirical data in large carnivores, for instance, support that several available patches are not occupied after isolation [@Paviolo2016]. 
+Our research contributes to the ongoing Single Large vs Several Small (SLOSS) debate in conservation biology, offering new insights based on our model findings. Consistent with previous studies, the results from our simulations primarily support the SS > SL pattern for species retention, as observed across various model scenarios [@Fahrig2020]. This trend underlines the greater efficacy of multiple smaller habitats in preserving species diversity compared to a single large habitat under similar conditions of habitat loss. A critical factor in this dynamic is the balance between reproduction and extinction rates ($\lambda$ parameter) relative to the size of the habitat patches, influencing their role as sources of propagules. Notably, the SL > SS scenario emerges only when dispersal limitations prevent patch connectivity, and patch sizes are below a certain threshold to prevent local extinctions, aligning with Rybicki's findings [@Rybicki2013].
 
-@Rybicki2013 suggested that both short-term and long-term extinctions are produced after fragmentation. Here, we observed that, in most cases, long-term loss of species in SS scenarios were less important than short-term extinctions in SL scenario.
-Overall, our results support the main conclusion by @Fahrig2021, in that the conditions for SL > SS are rather restricted and would not be observable in nature frequently (see @Fahrig2021, Fig 3). In contrast, if few conditions are met (minimum patch size and dispersal), SS would retain more species than SL for nearly all situations. Evidence suggests that small patches, even single structures such as isolated trees, can be important for biodiversity and landscape connectivity [@Shafer1995; @Manning2006]. While connectivity management is case-specific, our results further support past claims [@Fahrig2020;@Fahrig2021], that assuming that SL is always better does not have empirical support. In our work, spreading of risk was not modelled (__maybe as time lag in at-patch competition?__), therefore reinforcing that the sampling effect is enough to produce an SS > SL pattern if dispersal is small enough to produce spatial autocorrelation of occupied patches [@Simberloff1976].
+In neutral models one species by chance tends to dominate a patch [@Hubbell2001], so in fragmented landscapes and once the species increments its density is very unprobable that another species replaces it so with more patches the probability of having more species is augmented. This effect is enhanced when individuals can select the habitat, thus fragmentation have a positive effect in the number of species. For competitive communities, there is a higher probability that different species dominate different smaller patches, compared with a patch. Thus, again fragmentation has a positive effect on number of species. 
+This positive effect is counteracted by disperal, high dispersal rates tended to lead to a homogenization of species distributions, so fragmented landscapes tend to be more like not fragmented ones reducing overall species richness. This pattern was particularly pronounced for species combining high dispersal capabilities with competitive strengths, indicating a complex interplay between dispersal, competitive interactions, and species diversity [@Fahrig2020].
 
-One large patch can enhance competitive exclusion, and that is more important the more similar species are. Hummingbirds?
+The spatial arrangement of habitat patches, contrary to some expectations, did not produce different species richness patterns regarding fragmentation with few exceptions. Instead, the interplay between dispersal, patch size and between patch distance emerged as the primary factor influencing biodiversity patterns following habitat fragmentation, corroborated by empirical studies in large carnivores [@Paviolo2016]. The exceptions could be important, because stressed communities---represented in our models with lowest $\lambdas$--- with low dispersal may have a continuous increment of richnes with patch size, observed only in random block degradation patterns. This could be related to the optimal patch size for random block degradations tends to be higher than for regular degradation patterns, so we could hypothesize that the optimal was outside the simulated range for these stressed communities. 
+
+Our findings support Fahrig's [-@Fahrig2021] conclusion that conditions favoring SL > SS are limited and infrequently observed in nature [@Fahrig2021]. Under conditions of adequate patch size and dispersal capabilities, the SS scenario typically retains more species. This underscores the ecological significance of smaller habitat patches, such as isolated trees, in maintaining biodiversity and landscape connectivity [@Shafer1995; @Manning2006]. Our results thus challenge the conventional preference for larger reserves in conservation planning and suggest a more nuanced, context-specific approach.
+
+We also observed that the temporal dynamics of species extinction post-fragmentation vary, with long-term species loss in SS scenarios generally less severe than short-term extinctions in SL scenarios. This highlights the importance of considering both short-term and long-term impacts of habitat fragmentation on biodiversity.
+
+In conclusion, our study adds valuable perspectives to the SLOSS debate, illustrating the complexities of habitat fragmentation and species conservation. While our model has inherent limitations, it provides a useful framework for understanding key ecological processes. Future research should aim to extend these findings to more diverse ecological settings and incorporate additional factors influencing biodiversity in fragmented landscapes.
+
+
+
+<!-- Ver si se puede decir algo sobre las predicciones de la TABLA 1 de @Fahrig2021 -->
+
+<!-- One large patch can enhance competitive exclusion, and that is more important the more similar species are. Hummingbirds? -->
 
 ### Limitations
 
 We acknowledge the limitations of our study and consider it a strength that we have identified in this initial model. This allows us to continue working on them in future research.
+
+In our work, spreading of risk was not modelled (__maybe as time lag in at-patch competition?__), therefore reinforcing that the sampling effect is enough to produce an SS > SL pattern if dispersal is small enough to produce spatial autocorrelation of occupied patches [@Simberloff1976].
 
 Matrix is assumed as non-habitat
 
