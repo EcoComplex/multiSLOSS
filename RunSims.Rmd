@@ -160,6 +160,9 @@ netlogo_evaluate_patch_distr(mdl$find_cluster_sizes[1])
 ## Plots - No selection - regular pattern
 
 ```{r PlotsNoSelectionRegular, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
+# read data
+#
+sloss_sim <- readRDS("Simulations/sloss_sim_ff.rds") 
 
 # Neutral communities 
 #
@@ -230,7 +233,7 @@ mdl1 %>%
   labs(color = "Dispersal\n distance") +
   theme_bw() + xlab("Habitat Patch Size") + ylab("Shannon Diversity") +
   theme(
-    legend.position = c(0.9,0.8)
+    legend.position = c(0.9,0.2)
     ) 
 
 ggsave("Figures/Shannon_Habitat_Dispersal_Lambda_regular.png",width=8,height=6,units="in",dpi=600)
@@ -857,6 +860,52 @@ names(mdl)
 # summarize data 
 #
 mdl1 <- mdl %>% mutate(habitat_patch_size = habitat_patch_size+1) %>%
+                         group_by(birds_dispersal_distance, habitat_patch_size,birth_rate_birds,deforestation_type) %>% summarise(across(c(birds_at_deforestation:count_birds,max_patch,degraded_mfp,non_degraded_mfp),list(mean=mean, sd=sd, ql=~quantile(.x,probs=c((1-0.95)/2)), qh=~quantile(.x,probs=c(1-(1-0.95)/2)) ))) #  %>% mutate(deltaPop = (count_birds - birds_at_deforestation )/ birds_at_deforestation  )
+names(mdl1)
+
+mdl1 <- mdl1 %>%  mutate(across(max_patch_mean:max_patch_qh,sqrt)) 
+
+
+mdl1 %>%  filter(birth_rate_birds == 2) %>% 
+  ggplot(aes(x = max_patch_mean, y = calc_number_of_species_mean, color = factor(birds_dispersal_distance))) + 
+  geom_line(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = .5) +
+  geom_point(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = 1.2) +
+  geom_ribbon(aes(ymin = calc_number_of_species_ql, ymax = calc_number_of_species_qh, group = interaction(birds_dispersal_distance, deforestation_type), fill = factor(birds_dispersal_distance)), alpha = 0.3,colour=NA, show.legend = FALSE) +
+  scale_color_viridis_d() + scale_fill_viridis_d() +
+  facet_wrap(~ deforestation_type, ncol = 2) + 
+  labs(color = "Dispersal\n distance") +
+  theme_bw() + xlab("Max Habitat Patch Size") + ylab("Number of species") +
+  theme(
+    legend.position = c(0.9,0.8)
+    ) 
+
+ggsave("Figures/AcrossLoss_Species_Dispersal_Lambda2.png",width=8,height=6,units="in",dpi=600)
+  
+
+# Shannon-Diversity  
+#
+
+mdl1 %>%  filter(birth_rate_birds == 2) %>% 
+  ggplot(aes(x = max_patch_mean, y = calc_shannon_diversity_mean, color = factor(birds_dispersal_distance))) + 
+  geom_line(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = .5) +
+  geom_point(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = 1.2) +
+  geom_ribbon(aes(ymin = calc_shannon_diversity_ql, ymax = calc_shannon_diversity_qh, group = interaction(birds_dispersal_distance, deforestation_type), fill = factor(birds_dispersal_distance)), alpha = 0.3,colour=NA, show.legend = FALSE) +
+  scale_color_viridis_d() + scale_fill_viridis_d() +
+  facet_wrap(~ deforestation_type, ncol = 4) + 
+  labs(color = "Dispersal\n distance") +
+  theme_bw() + xlab("Max Habitat Patch Size") + ylab("Shannon Diversity") +
+  theme(
+    legend.position = c(0.9,0.8)
+    ) 
+
+ggsave("Figures/AcrossLoss_Shannon_Dispersal_Lambda2.png",width=8,height=6,units="in",dpi=600)
+
+
+
+#
+# summarize data mean patch size
+#
+mdl1 <- mdl %>% mutate(habitat_patch_size = habitat_patch_size+1) %>%
                          group_by(birds_dispersal_distance, habitat_patch_size,birth_rate_birds,deforestation_type) %>% summarise(across(c(birds_at_deforestation:count_birds,mean_patch,degraded_mfp,non_degraded_mfp),list(mean=mean, sd=sd, ql=~quantile(.x,probs=c((1-0.95)/2)), qh=~quantile(.x,probs=c(1-(1-0.95)/2)) ))) #  %>% mutate(deltaPop = (count_birds - birds_at_deforestation )/ birds_at_deforestation  )
 names(mdl1)
 
@@ -871,30 +920,16 @@ mdl1 %>%  filter(birth_rate_birds == 2) %>%
   scale_color_viridis_d() + scale_fill_viridis_d() +
   facet_wrap(~ deforestation_type, ncol = 2) + 
   labs(color = "Dispersal\n distance") +
-  theme_bw() + xlab("Habitat Patch Size") + ylab("Number of species") +
-  theme(
-    legend.position = c(0.9,0.8)
-    ) 
-
-ggsave("Figures/AcrossLoss_Species_Dispersal_Lambda2.png",width=8,height=6,units="in",dpi=600)
-  
-
-# Shannon-Diversity  
-#
-mdl1 %>%  filter(birth_rate_birds == 2) %>% 
-  ggplot(aes(x = mean_patch_mean, y = calc_shannon_diversity_mean, color = factor(birds_dispersal_distance))) + 
-  geom_line(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = .5) +
-  geom_point(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = 1.2) +
-  geom_ribbon(aes(ymin = calc_shannon_diversity_ql, ymax = calc_shannon_diversity_qh, group = interaction(birds_dispersal_distance, deforestation_type), fill = factor(birds_dispersal_distance)), alpha = 0.3,colour=NA, show.legend = FALSE) +
-  scale_color_viridis_d() + scale_fill_viridis_d() +
-  facet_wrap(~ deforestation_type, ncol = 2) + 
-  labs(color = "Dispersal\n distance") +
   theme_bw() + xlab("Mean Habitat Patch Size") + ylab("Number of species") +
   theme(
     legend.position = c(0.9,0.8)
     ) 
 
-ggsave("Figures/AcrossLoss_Species_Dispersal_Lambda2.png",width=8,height=6,units="in",dpi=600)
+ggsave("Figures/AcrossLoss_Species_Dispersal_Lambda2_mean.png",width=8,height=6,units="in",dpi=600)
+  
+
+# Shannon-Diversity  
+#
 
 mdl1 %>%  filter(birth_rate_birds == 2) %>% 
   ggplot(aes(x = mean_patch_mean, y = calc_shannon_diversity_mean, color = factor(birds_dispersal_distance))) + 
@@ -909,10 +944,7 @@ mdl1 %>%  filter(birth_rate_birds == 2) %>%
     legend.position = c(0.9,0.8)
     ) 
 
-
-
-ggsave("Figures/AcrossLoss_Shannon_Dispersal_Lambda2.png",width=8,height=6,units="in",dpi=600)
-
+ggsave("Figures/AcrossLoss_Shannon_Dispersal_Lambda2_mean.png",width=8,height=6,units="in",dpi=600)
 
 ```
 
