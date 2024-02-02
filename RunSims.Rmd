@@ -643,7 +643,7 @@ mdl1 %>%
   labs(color = "Dispersal\n distance") +
   theme_bw() + xlab("Habitat Patch Size") + ylab("Shannon Diversity") +
   theme(
-    legend.position = c(0.9,0.8)
+    legend.position = c(0.94,0.83)
     ) 
 
 

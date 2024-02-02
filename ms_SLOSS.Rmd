@@ -151,11 +151,3 @@ In conclusion, we believe our study adds valuable perspectives to the SLOSS deba
 ## References
   
 
-[a]esta frase no me convence en general pero me parece que algo de esto es necesario para no saltar tanto desde lo que venimos hablando a el "here we..."
-[b]Lo que trato de decir aca es que consideramos modelos de comunidades de distintos tipos, neutral y competitiva, con distintos traits de dispersion y distintos patrones de habitat loss.
-[c]Cambié bastante la frase para agregar la discusion de la cube hypothesis.
-[d]Hay 2 procesos migracion de la metacomunidad y dispersion local
-[e]matendría en los plots el orden y nombres que están en el texto:
-1) Neutral
-2) Habitat Selection
-3) Competitive Hierarchical
