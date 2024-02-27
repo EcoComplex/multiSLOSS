@@ -953,3 +953,30 @@ ggsave("Figures/AcrossLoss_Shannon_Dispersal_Lambda2_mean.png",width=8,height=6,
 
 ```
 
+## Figure of spatial patterns
+
+
+```{r PlotsSpatialPattern, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
+require(cowplot)
+require(ggplot2)
+require(png)
+
+image_paths <- c("Figures/NoSelection_lambda2_dd15_ps3_before_nsp37.png","Figures/NoSelection_lambda2_dd15_ps3_after_nsp32.png","Figures/NoSelection_lambda2_dd15_ps3_after_lt_nsp3.png",
+                 "Figures/NoSelection_lambda2_dd15_ps29_ before_nsp36.png","Figures/NoSelection_lambda2_dd15_ps29_ after_nsp29.png","Figures/NoSelection_lambda2_dd15_ps29_ after_lt_nsp25.png")
+
+plots <- lapply(seq_along(image_paths), function(i) {
+  ggdraw() +  draw_image(image_paths[i],scale=0.9)
+  #ggplot() + annotation_custom(ggplotGrob(readPNG(image_paths[i])), xmin=-Inf, xmax=Inf, ymin=-Inf, ymax=Inf) +
+})
+
+aplots <- plot_grid(plotlist = plots, ncol = 2,
+  labels = c('A.', 'B.', 'C.', 'D.','E.','F.'),
+  label_fontface = "plain",
+  byrow = FALSE
+  )
+aplots
+save_plot("Figures/ModelSpatialPatternComparison.png",aplots,base_width=6,base_height=8,dpi=600)
+
+
+```
+
