@@ -3,11 +3,11 @@ title: "Why there are more species in several small patches vs few large patches
   a multi-species modeling approach"
 bibliography: sloss_bib.bib
 csl: "functional-ecology.csl"
-
 output:
-  pdf_document: 
+  pdf_document:
     includes:
       in_header: margins.sty
+  word_document: default
 ---
 
 
@@ -23,7 +23,7 @@ output:
  
 ## Keywords
 
-Habitat fragmentation, biodiversity, spatially explicit models, multi-species models, neutral theory, competitive theory, habitat selection, dispersal, extinction, reproduction.
+Habitat fragmentation, biodiversity, spatially explicit models, multi-species models, neutral theory.
 
 ## Introduction 
 

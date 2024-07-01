@@ -1,3 +1,6 @@
+
+Habitat amount 20 40 60%
+
 # Source code paragraph deleted to anonimyze the manuscript
 
 The model was developed in Netlogo 6.3.0 and the model source code is available at Github <https://github.com/lsaravia/DynamicForestExtinction>, the Overview, Design concepts, Details (ODD), protocol for describing individual-based models is included within the model source code [@Grimm2010]. We performed the simulations and analysis using R version 4.3.1 [@RCoreTeam2023], the R source code to perform simulations and analysis is located at <https://github.com/EcoComplex/multiSLOSS>. 
@@ -116,3 +119,9 @@ Habitat loss is one of the key drivers of the ongoing decline of biodiversity. H
 @Riva2023
 
 However, when comparing sets of patches totaling the same area, as patches become smaller they also become more numerous, reducing the probability of extinction over the entire set of patches (e.g. due to spreading of risk; den Boer, 1968). This has been predicted in models and demonstrated in experimental microcosms (Fox et al., 2017; Hammill & Clements, 2020). Similarly, smaller populations are more susceptible to ecological drift, which can increase stochastic extinctions in each of many small patches. Nevertheless, ecological drift can also increase biodiversity in sets of many small patches due to reduced competitive exclusion and a higher chance of stochastic divergence in community composition (Gilbert & Levine,2017; Vellend et al.,2014).
+
+
+----
+@Villard2014
+
+However, we have recent and strong evidence from an Atlantic forest project that configuration can affect more strongly species abundance and richness at intermediate amounts of habitat (30%), when compared with landscapes with 10 and 50% of habitat left. This was observed in small mammals (Pardini et al. 2010), birds (Martensen et al. 2012), and amphibians (M. Dixo, T.H. Conde & R.T. Bruscagin, unpublished data).
