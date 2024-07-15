@@ -1,5 +1,6 @@
 
 Habitat amount 20 40 60%
+rmarkdown::render("RunSims.Rmd")
 
 # Source code paragraph deleted to anonimyze the manuscript
 

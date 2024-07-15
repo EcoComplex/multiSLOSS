@@ -22,6 +22,11 @@ lapply(needed_packages, function(x) { if(!require(x,character.only = TRUE)) inst
 theme_set(theme_bw())
 source("R/functions.r")
 
+# NetLogo installation path (adjust to your needs!):
+#
+netlogopath <- file.path("/home/leonardo/NetLogo")
+outpath <- file.path("Simulations")
+
 #
 # Where the NetLogo model is
 # Setup for nlrx 
@@ -31,16 +36,16 @@ if( Sys.info()['nodename'] =="ls-pro") {
   
 } else if(Sys.info()['nodename'] =="biologia2018") {                     # Server UNGS
   simfolder <- "/home/leonardo/Dropbox/Projects/DynamicForestExtinction"                       
+  Sys.setenv(JAVA_HOME = "/usr/lib/jvm/java-17-openjdk-amd64")
 
 } else if(Sys.info()['nodename'] =="MacLeonardo.local") {                     # Mac
   simfolder <- "~/Dropbox/Projects/DynamicForestExtinction"
+  netlogopath <- file.path("/Applications/NetLogo\ 6.4.0")                   
+  Sys.setenv(JAVA_HOME = "/Library/Java/JavaVirtualMachines/liberica-jdk-17.jdk/Contents/Home")
+
 }
 
-# Unix default NetLogo installation path (adjust to your needs!):
-#
-netlogopath <- file.path("/home/leonardo/NetLogo")
 modelpath <- file.path(simfolder, "MultipleContactNeutralMigrat.nlogo")
-outpath <- file.path("Simulations")
 
 # If not defined set the JAVA version of your local 
 if(Sys.getenv("JAVA_HOME")==""){
@@ -48,7 +53,7 @@ if(Sys.getenv("JAVA_HOME")==""){
   ## "/usr/lib/jvm/java-8-oracle"
 }
 
-nl <- nl(nlversion = "6.3",
+nl <- nl(nlversion = "6.4",
          nlpath = netlogopath,
          modelpath = modelpath,
          jvmmem = 2048)
@@ -160,7 +165,7 @@ netlogo_evaluate_patch_distr(mdl$find_cluster_sizes[1])
 ## Lambda = 1-4 NoSelection = Neutral  Regular prog frag 0.4-0.8
 
 
-```{r SLOSS_lambda14_pf48_regular,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=TRUE}
+```{r SLOSS_lambda14_pf48_regular,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
 
 # pf = probability of fragmentation, hps = habitat patch size , dd=dispersal distance 
 # hps = habitat patch size
@@ -222,6 +227,35 @@ setsim(nl, "simoutput") <- results
 write_simoutput(nl)
 ```
 
+## Read Simulations pf 0.4 - 0.8
+
+```{r readSimulations_pf48, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
+# Read previous simulations
+#
+if( file.exists("Simulations/sloss_sim_ff.rds")) {
+
+  sloss_sim <- readRDS("Simulations/sloss_sim_ff.rds") 
+  
+} else {
+  sloss_sim <- tibble()
+}
+
+# Read netlogo simulations and 
+# Convert the list of mean_free_path to degraded_mfp and non_degraded_mfp
+# Calculate cluster stats
+#
+# Old 10 - 20 simulations 
+# mdl <- read_netlogo_simul(file.path(outpath,"NoSelection_pf06_hps3-61_dd1-3_brb1-4_ff.csv"),skip=0) %>% 
+# mdl <- read_netlogo_simul(file.path(outpath,"NoSelection_pf06_hps3-61_dd1-3_brb1-4_20_ff.csv"),skip=0) %>% 
+
+mdl <- read_sloss_simul(outpath,"NoSelection_pf04-08_hps3-61_dd1-3_brb1-4_regular_ff.csv")
+
+sloss_sim <- bind_rows(sloss_sim,mdl)
+
+saveRDS(sloss_sim, "Simulations/sloss_sim_ff.rds")
+
+```
+
 
 ## Plots - No selection - regular pattern
 
@@ -240,29 +274,32 @@ names(mdl)
 # pexp = (1 - 2 * birds_dispersal_distance ) / (1 - birds_dispersal_distance ), median_dispersal_distance = 2^(1/pexp-1) 
 #
 mdl1 <- mdl %>% mutate(habitat_patch_size = habitat_patch_size+1) %>%
-                         group_by(birds_dispersal_distance, habitat_patch_size,birth_rate_birds) %>% summarise(across(c(birds_at_deforestation:count_birds,max_patch,degraded_mfp,non_degraded_mfp),list(mean=mean, sd=sd, ql=~quantile(.x,probs=c((1-0.95)/2)), qh=~quantile(.x,probs=c(1-(1-0.95)/2)) ))) 
+                         group_by(birds_dispersal_distance, habitat_patch_size,birth_rate_birds,prob_frag) %>% summarise(across(c(birds_at_deforestation:count_birds,mean_patch,degraded_mfp,non_degraded_mfp),list(mean=mean, sd=sd, ql=~quantile(.x,probs=c((1-0.95)/2)), qh=~quantile(.x,probs=c(1-(1-0.95)/2)) ))) 
 
 names(mdl1)
 
-mdl1 <- mdl1 %>%  mutate(across(max_patch_mean:max_patch_qh,sqrt)) 
+mdl1 <- mdl1 %>%  mutate(across(mean_patch_mean:mean_patch_qh,sqrt)) 
 
 #
 # Block patch size vs max patch size
 #
 mdl1 %>%  
-  ggplot(aes(x = max_patch_mean, y = habitat_patch_size, color = factor(habitat_patch_size))) + 
-  geom_point(  size = 1.2) + guides(color = "none") #+
+  ggplot(aes(x = habitat_patch_size, y = mean_patch_mean, color = factor(prob_frag))) + 
+  geom_point(  size = 1.2) + guides(color = "none") + 
+  theme_bw()
 
 mdl1 %>%  
-  ggplot(aes(x = max_patch_mean, y = degraded_mfp_mean, color = factor(habitat_patch_size))) + 
-  geom_point(  size = 1.2) + guides(color = "none") #+
+  ggplot(aes(x = habitat_patch_size, y = degraded_mfp_mean, color = factor(prob_frag))) + 
+  geom_point(  size = 1.2) + guides(color = "none") +
+  theme_bw()
 
 mdl1 %>%  
-  ggplot(aes(x = max_patch_mean, y = non_degraded_mfp_mean, color = factor(habitat_patch_size))) + 
-  geom_point(  size = 1.2) + guides(color = "none") #+
+  ggplot(aes(x = habitat_patch_size, y = non_degraded_mfp_mean, color = factor(prob_frag))) + 
+  geom_point(  size = 1.2) + guides(color = "none") +
+  theme_bw()
 
 mdl1 %>%  
-  ggplot(aes(x = degraded_mfp_mean, y = non_degraded_mfp_mean, color = factor(habitat_patch_size))) + 
+  ggplot(aes(x = degraded_mfp_mean, y = non_degraded_mfp_mean, color = factor(prob_frag))) + 
   geom_point(  size = 1.2) + guides(color = "none") #+
 
 
@@ -271,20 +308,21 @@ mdl1 %>%
 # plot_ly(data=mdl1, x=~birds_dispersal_distance, y=~habitat_patch_size, z=~calc_number_of_species, type="scatter3d", mode="markers", color=~calc_number_of_species, marker = list(size = 1))
 
 
-mdl1 %>%  
+mdl1 %>%  #filter(prob_frag==0.4) %>%
   ggplot(aes(x = habitat_patch_size, y = calc_number_of_species_mean, color = factor(birds_dispersal_distance))) + 
   geom_line(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = .5) +
   geom_point(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = 1.2) +
   geom_ribbon(aes(ymin = calc_number_of_species_ql, ymax = calc_number_of_species_qh, group = interaction(birds_dispersal_distance, birth_rate_birds), fill = factor(birds_dispersal_distance)), alpha = 0.2,colour=NA, show.legend = FALSE) +
   scale_color_viridis_d() + scale_fill_viridis_d() +
-  facet_wrap(~ birth_rate_birds, ncol = 4) + 
+  #facet_wrap( ~ birth_rate_birds, ncol = 4) + 
+  facet_grid(prob_frag ~ birth_rate_birds) +
   labs(color = "Dispersal\n distance") +
   theme_bw() + xlab("Habitat Patch Size") + ylab("Number of species") +
   theme(
-    legend.position = c(0.9,0.8)
-    ) 
-
-ggsave("Figures/Species_Habitat_Dispersal_Lambda_regular.png",width=8,height=6,units="in",dpi=600)
+    legend.position = "bottom",
+    legend.direction = "horizontal"
+  ) 
+ggsave("Figures/Species_Habitat_Dispersal_Lambda_pf_regular.png",width=8,height=6,units="in",dpi=600)
   
 
 # Shannon-Diversity  
@@ -295,51 +333,58 @@ mdl1 %>%
   geom_point(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = 1.2) +
   geom_ribbon(aes(ymin = calc_shannon_diversity_ql, ymax = calc_shannon_diversity_qh, group = interaction(birds_dispersal_distance, birth_rate_birds), fill = factor(birds_dispersal_distance)), alpha = 0.2,colour=NA, show.legend = FALSE) +
   scale_color_viridis_d() + scale_fill_viridis_d() +
-  facet_wrap(~ birth_rate_birds, ncol = 4) + 
+  #facet_wrap(~ birth_rate_birds, ncol = 4) + 
+  facet_grid(prob_frag ~ birth_rate_birds) +
   labs(color = "Dispersal\n distance") +
   theme_bw() + xlab("Habitat Patch Size") + ylab("Shannon Diversity") +
   theme(
-    legend.position = c(0.9,0.2)
-    ) 
+    legend.position = "bottom",
+    legend.direction = "horizontal"
+  ) 
 
-ggsave("Figures/Shannon_Habitat_Dispersal_Lambda_regular.png",width=8,height=6,units="in",dpi=600)
+ggsave("Figures/Shannon_Habitat_Dispersal_Lambda_pf_regular.png",width=8,height=6,units="in",dpi=600)
 
 
 #
-# Number of species by max_patch size 
+# Number of species by mean_patch size 
 # 
-mdl1  %>% #filter(birds_dispersal_distance %in% c(1.1,1.5,3)) %>%
-  ggplot(aes(x = max_patch_mean, y = calc_number_of_species_mean, color = factor(birds_dispersal_distance))) + 
+mdl1 %>%  
+  ggplot(aes(x = mean_patch_mean, y = calc_number_of_species_mean, color = factor(birds_dispersal_distance))) + 
   geom_line(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = .5) +
   geom_point(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = 1.2) +
   geom_ribbon(aes(ymin = calc_number_of_species_ql, ymax = calc_number_of_species_qh, group = interaction(birds_dispersal_distance, birth_rate_birds), fill = factor(birds_dispersal_distance)), alpha = 0.2,colour=NA, show.legend = FALSE) +
-  scale_color_viridis_d() +
-  facet_wrap(~ birth_rate_birds, ncol = 4) + 
+  scale_color_viridis_d() + scale_fill_viridis_d() +
+  #facet_wrap( ~ birth_rate_birds, ncol = 4) + 
+  facet_grid(prob_frag ~ birth_rate_birds) +
   labs(color = "Dispersal\n distance") +
-  theme_bw() + xlab("Max patch size") + ylab("Number of species") +
+  theme_bw() + xlab("Mean Patch Size") + ylab("Number of species") +
   theme(
-    legend.position = c(0.9,0.8)
-    ) 
+    legend.position = "bottom",
+    legend.direction = "horizontal"
+  ) 
 
-ggsave("Figures/Species_MaxPatch_Dispersal_Lambda_regular.png",width=8,height=6,units="in",dpi=600)
+ggsave("Figures/Species_MeanPatch_Dispersal_Lambda_pf_regular.png",width=8,height=6,units="in",dpi=600)
 
 
 #
-# shannon_diversity by max_patch size 
+# shannon_diversity by mean_patch size 
 # 
 mdl1  %>% #filter(birds_dispersal_distance %in% c(1.1,1.5,3)) %>%
-  ggplot(aes(x = max_patch_mean, y = calc_shannon_diversity_mean, color = factor(birds_dispersal_distance))) + 
-  geom_line(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)) ,  size = 1.2) +
+  ggplot(aes(x = mean_patch_mean, y = calc_shannon_diversity_mean, color = factor(birds_dispersal_distance))) + 
+  geom_line(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = .5) +
+  geom_point(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = 1.2) +
   geom_ribbon(aes(ymin = calc_shannon_diversity_ql, ymax = calc_shannon_diversity_qh, group = interaction(birds_dispersal_distance, birth_rate_birds), fill = factor(birds_dispersal_distance)), alpha = 0.2,colour=NA, show.legend = FALSE) +
-  scale_color_viridis_d() +
-  facet_wrap(~ birth_rate_birds, ncol = 4) + 
+  scale_color_viridis_d() + scale_fill_viridis_d() +
+  #facet_wrap( ~ birth_rate_birds, ncol = 4) + 
+  facet_grid(prob_frag ~ birth_rate_birds) +
   labs(color = "Dispersal\n distance") +
-  theme_bw() + xlab("Max patch size") + ylab("Shannon Diversity") +
+  theme_bw() + xlab("Mean Patch Size") + ylab("Shannon Diversity") +
   theme(
-    legend.position = c(0.9,0.2)
-    ) 
+    legend.position = "bottom",
+    legend.direction = "horizontal"
+  ) 
 
-ggsave("Figures/Shannon_MaxPatch_Dispersal_Lambda_regular.png",width=8,height=6,units="in",dpi=600)
+ggsave("Figures/Shannon_MeanPatch_Dispersal_Lambda_regular.png",width=8,height=6,units="in",dpi=600)
 
 
 ```
@@ -413,7 +458,7 @@ write_simoutput(nl)
 
 
 
-## Read Simulations No Selection Random Block Patterns
+## Read Simulations No Selection Random Block Patterns prob-frag = 0.6
 
 ```{r readSimulationsBlock, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
 # Read previous simulations
@@ -439,6 +484,96 @@ saveRDS(sloss_sim, "Simulations/sloss_sim_ff.rds")
 ```
 
 
+## Lambda = 1-4 / Random Block patterns / prob-frag 0.4 - 0.8 
+
+
+```{r SLOSS_lambda14_pf48_block,echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=TRUE}
+
+# pf = probability of fragmentation, hps = habitat patch size , dd=dispersal distance 
+# hps = habitat patch size
+# dd = dispersal distance 
+# brb = bird rate birds 
+nl@experiment <- experiment(expname="NoSelection_pf04_08_hps3-61_dd1-3_brb1-4_block",
+                            outpath=outpath,
+                            repetition=1,
+                            tickmetrics="false",
+                            idsetup="setup",
+                            idgo="go",
+                            runtime=0,
+                            metrics=c("birds-at-deforestation", "calc-number-of-species","calc-shannon-diversity","count birds", "mean-free-path", "find-cluster-sizes"),
+                            variables = list("birds-dispersal-distance" = list(values=c(1.1, 1.2, 1.5, 2, 3)),
+                                              "habitat-patch-size" = list(values=c(3, 9, 29, 61)),
+                                               "birth-rate-birds" = list(values=c(1.7, 2, 3, 4)),
+                                               "prob-frag" =  list(values=c(0.4,0.8))
+                                             ),
+                            constants = list("world-width" = 199,
+                                             "world-height" = 199,
+                                             "initial-population" = 0,
+                                             "max-birds-species" = 100,
+                                             "death-rate-birds" = 1,
+                                             "migration-rate-birds" = 0.0001,
+                                             "Video" = "false",
+                                             "Deforestation-at-time" = 200,
+                                             "end-time" = 1500,
+                                             "Migration0-at-deforestation" = "false",
+                                             "deforestation-type" = "\"random block\"",
+                                             "birds-behavior" = "\"NoSelection\"",
+                                             "replacement-rate" = 0.0
+                                             ))
+
+
+#
+# Run nseeds=10 times 
+#
+# Total number of jobs = nseeds * split = 30*2 
+# Each job runs parameter input matrix / split = nrow(nl@simdesign@siminput) / split =  80 / 2 
+#
+
+nl@simdesign <- simdesign_ff(nl=nl,
+                               nseeds=30)
+
+# run in Paralell 
+#
+plan(multisession)
+tic()
+results <- run_nl_all(nl,split = 2)
+#results <- run_nl_all(nl,split = 4)
+toc()
+plan(sequential)
+names(results)
+
+#
+# Write the output 
+#
+setsim(nl, "simoutput") <- results 
+write_simoutput(nl)
+```
+
+## Read Simulations No Selection Random Block Patterns prob-frag 0.4 - 0.8
+
+```{r readSimulationsBlock_pf04-08, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
+# Read previous simulations
+#
+if( file.exists("Simulations/sloss_sim_ff.rds")) {
+
+  sloss_sim <- readRDS("Simulations/sloss_sim_ff.rds") 
+  
+} else {
+  sloss_sim <- tibble()
+}
+
+# Read netlogo simulations and 
+# Convert the list of mean_free_path to degraded_mfp and non_degraded_mfp
+#
+mdl <- read_sloss_simul(outpath,"NoSelection_pf04_08_hps3-61_dd1-3_brb1-4_block_ff.csv")
+
+sloss_sim <- bind_rows(sloss_sim,mdl)
+
+
+saveRDS(sloss_sim, "Simulations/sloss_sim_ff.rds")
+
+```
+
 ## Plots Neutral No Selection Random Block Patterns Plots
 
 ```{r NeutralRandomBlockPlots, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
@@ -451,24 +586,24 @@ names(mdl)
 # Plot for neutral communities 
 #
 mdl1 <- mdl %>% mutate(habitat_patch_size = habitat_patch_size+1) %>%
-                         group_by(birds_dispersal_distance, habitat_patch_size,birth_rate_birds) %>% summarise(across(c(birds_at_deforestation:count_birds,non_degraded_mfp,degraded_mfp,max_patch) ,list(mean=mean, sd=sd, ql=~quantile(.x,probs=c((1-0.95)/2)), qh=~quantile(.x,probs=c(1-(1-0.95)/2)) ))) #  %>% mutate(deltaPop = (count_birds - birds_at_deforestation )/ 
+                         group_by(birds_dispersal_distance, habitat_patch_size,birth_rate_birds,prob_frag) %>% summarise(across(c(birds_at_deforestation:count_birds,mean_patch,degraded_mfp,non_degraded_mfp),list(mean=mean, sd=sd, ql=~quantile(.x,probs=c((1-0.95)/2)), qh=~quantile(.x,probs=c(1-(1-0.95)/2)) ))) 
 
 names(mdl1)
-mdl1 <- mdl1 %>%  mutate(across(max_patch_mean:max_patch_qh,sqrt)) 
+mdl1 <- mdl1 %>%  mutate(across(mean_patch_mean:mean_patch_qh,sqrt)) 
 
 #
 # Block patch size vs max patch size
 #
 mdl1 %>%  
-  ggplot(aes(x = max_patch_mean, y = habitat_patch_size, color = factor(habitat_patch_size))) + 
+  ggplot(aes(x = mean_patch_mean, y = habitat_patch_size, color = factor(habitat_patch_size))) + 
   geom_point(  size = 1.2) + guides(color = "none") #+
 
 mdl1 %>%  
-  ggplot(aes(x = max_patch_mean, y = degraded_mfp_mean, color = factor(habitat_patch_size))) + 
+  ggplot(aes(x = mean_patch_mean, y = degraded_mfp_mean, color = factor(habitat_patch_size))) + 
   geom_point(  size = 1.2) + guides(color = "none") #+
 
 mdl1 %>%  
-  ggplot(aes(x = max_patch_mean, y = non_degraded_mfp_mean, color = factor(habitat_patch_size))) + 
+  ggplot(aes(x = mean_patch_mean, y = non_degraded_mfp_mean, color = factor(habitat_patch_size))) + 
   geom_point(  size = 1.2) + guides(color = "none") #+
 
 mdl1 %>%  
@@ -478,78 +613,106 @@ mdl1 %>%
 #
 # Number of species by patch block size
 #
-mdl1 %>%  
+mdl1 %>%  #filter(prob_frag==0.4) %>%
   ggplot(aes(x = habitat_patch_size, y = calc_number_of_species_mean, color = factor(birds_dispersal_distance))) + 
   geom_line(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = .5) +
   geom_point(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = 1.2) +
   geom_ribbon(aes(ymin = calc_number_of_species_ql, ymax = calc_number_of_species_qh, group = interaction(birds_dispersal_distance, birth_rate_birds), fill = factor(birds_dispersal_distance)), alpha = 0.2,colour=NA, show.legend = FALSE) +
-  scale_color_viridis_d() +
-  facet_wrap(~ birth_rate_birds, ncol = 4) + 
+  scale_color_viridis_d() + scale_fill_viridis_d() +
+  #facet_wrap( ~ birth_rate_birds, ncol = 4) + 
+  facet_grid(prob_frag ~ birth_rate_birds) +
   labs(color = "Dispersal\n distance") +
   theme_bw() + xlab("Habitat Patch Size") + ylab("Number of species") +
   theme(
-    legend.position = c(0.9,0.8)
-    ) 
-
-ggsave("Figures/Species_Habitat_Dispersal_Lambda_block.png",width=8,height=6,units="in",dpi=600)
-  
-
+    legend.position = "bottom",
+    legend.direction = "horizontal"
+  ) 
+ggsave("Figures/Species_Habitat_Dispersal_Lambda_pf_block.png",width=8,height=6,units="in",dpi=600)
 
 
 # Shannon-Diversity  
 #
 mdl1 %>%  
   ggplot(aes(x = habitat_patch_size, y = calc_shannon_diversity_mean, color = factor(birds_dispersal_distance))) + 
-  geom_line(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = 1.2) +
+  geom_line(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = .5) +
+  geom_point(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = 1.2) +
   geom_ribbon(aes(ymin = calc_shannon_diversity_ql, ymax = calc_shannon_diversity_qh, group = interaction(birds_dispersal_distance, birth_rate_birds), fill = factor(birds_dispersal_distance)), alpha = 0.2,colour=NA, show.legend = FALSE) +
-  scale_color_viridis_d() +
-  facet_wrap(~ birth_rate_birds, ncol = 4) + 
+  scale_color_viridis_d() + scale_fill_viridis_d() +
+  #facet_wrap(~ birth_rate_birds, ncol = 4) + 
+  facet_grid(prob_frag ~ birth_rate_birds) +
   labs(color = "Dispersal\n distance") +
-  theme_bw() + xlab("Habitat Patch Size") + ylab("Number of species") +
+  theme_bw() + xlab("Habitat Patch Size") + ylab("Shannon Diversity") +
   theme(
-    legend.position = c(0.9,0.8)
-    ) 
+    legend.position = "bottom",
+    legend.direction = "horizontal"
+  ) 
 
 
-ggsave("Figures/Shannon_Habitat_Dispersal_Lambda_block.png",width=8,height=6,units="in",dpi=600)
+ggsave("Figures/Shannon_Habitat_Dispersal_Lambda_pf_block.png",width=8,height=6,units="in",dpi=600)
 
 
 #
 # Number of species by max_patch size 
 # 
-mdl1  %>% #filter(birds_dispersal_distance %in% c(1.1,1.5,3)) %>%
-  ggplot(aes(x = max_patch_mean, y = calc_number_of_species_mean, color = factor(birds_dispersal_distance))) + 
+mdl1 %>%  
+  ggplot(aes(x = mean_patch_mean, y = calc_number_of_species_mean, color = factor(birds_dispersal_distance))) + 
   geom_line(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = .5) +
   geom_point(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = 1.2) +
   geom_ribbon(aes(ymin = calc_number_of_species_ql, ymax = calc_number_of_species_qh, group = interaction(birds_dispersal_distance, birth_rate_birds), fill = factor(birds_dispersal_distance)), alpha = 0.2,colour=NA, show.legend = FALSE) +
   scale_color_viridis_d() + scale_fill_viridis_d() +
-  facet_wrap(~ birth_rate_birds, ncol = 4) + 
+  #facet_wrap( ~ birth_rate_birds, ncol = 4) + 
+  facet_grid(prob_frag ~ birth_rate_birds) +
   labs(color = "Dispersal\n distance") +
-  theme_bw() + xlab("Max patch size") + ylab("Number of species") +
+  theme_bw() + xlab("Mean Patch Size") + ylab("Number of species") +
   theme(
-    legend.position = c(0.9,0.83)
-    ) 
+    legend.position = "bottom",
+    legend.direction = "horizontal"
+  ) 
 
-ggsave("Figures/Species_MaxPatch_Dispersal_Lambda_block.png",width=8,height=6,units="in",dpi=600)
+
+ggsave("Figures/Species_MeanPatch_Dispersal_Lambda_pf_block.png",width=8,height=6,units="in",dpi=600)
 
 
 #
-# shannon_diversity by max_patch size 
+# shannon_diversity by mean_patch size 
 # 
-mdl1  %>% # filter(birds_dispersal_distance %in% c(1.1,1.5,3)) %>%
-  ggplot(aes(x = max_patch_mean, y = calc_shannon_diversity_mean, color = factor(birds_dispersal_distance))) + 
+mdl1 %>%  
+  ggplot(aes(x = mean_patch_mean, y = calc_shannon_diversity_mean, color = factor(birds_dispersal_distance))) + 
   geom_line(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = .5) +
   geom_point(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = 1.2) +
   geom_ribbon(aes(ymin = calc_shannon_diversity_ql, ymax = calc_shannon_diversity_qh, group = interaction(birds_dispersal_distance, birth_rate_birds), fill = factor(birds_dispersal_distance)), alpha = 0.2,colour=NA, show.legend = FALSE) +
   scale_color_viridis_d() + scale_fill_viridis_d() +
-  facet_wrap(~ birth_rate_birds, ncol = 4) + 
+  #facet_wrap( ~ birth_rate_birds, ncol = 4) + 
+  facet_grid(prob_frag ~ birth_rate_birds) +
   labs(color = "Dispersal\n distance") +
-  theme_bw() + xlab("Max patch size") + ylab("Shannon Diversity") +
+  theme_bw() + xlab("Mean Patch Size") +  ylab("Shannon Diversity") +
   theme(
-    legend.position = c(0.9,0.2)
-    ) 
+    legend.position = "bottom",
+    legend.direction = "horizontal"
+  ) 
 
-ggsave("Figures/Shannon_MaxPatch_Dispersal_Lambda_block.png",width=8,height=6,units="in",dpi=600)
+ggsave("Figures/Shannon_MeanPatch_Dispersal_Lambda_pf_block.png",width=8,height=6,units="in",dpi=600)
+
+#
+# Number of species by habitat mean free path 
+# 
+mdl1 %>%  
+  ggplot(aes(x = non_degraded_mfp_mean, y = calc_number_of_species_mean, color = factor(birds_dispersal_distance))) + 
+  geom_line(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = .5) +
+  geom_point(aes(group = interaction(birds_dispersal_distance, birth_rate_birds)),  size = 1.2) +
+  geom_ribbon(aes(ymin = calc_number_of_species_ql, ymax = calc_number_of_species_qh, group = interaction(birds_dispersal_distance, birth_rate_birds), fill = factor(birds_dispersal_distance)), alpha = 0.2,colour=NA, show.legend = FALSE) +
+  scale_color_viridis_d() + scale_fill_viridis_d() +
+  #facet_wrap( ~ birth_rate_birds, ncol = 4) + 
+  facet_grid(prob_frag ~ birth_rate_birds) +
+  labs(color = "Dispersal\n distance") +
+  theme_bw() + xlab("Habitat Mean Free Path") + ylab("Number of species") +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "horizontal"
+  ) 
+
+
+ggsave("Figures/Species_habitatMFP_Dispersal_Lambda_pf_block.png",width=8,height=6,units="in",dpi=600)
 
 
 ```
@@ -645,7 +808,70 @@ saveRDS(sloss_sim, "Simulations/sloss_sim_ff.rds")
 
 ```
 
+## Simulations Lambda = 1-4 / Regular patterns - Hierarchical communities / prog-frag 0.4-0.8
 
+```{r Hierarchical_SLOSS_lambda14_pf48_simulations_regular,echo=FALSE,message=FALSE,warning=FALSE,eval=TRUE}
+
+# pf = probability of fragmentation, hps = habitat patch size , dd=dispersal distance 
+# hps = habitat patch size
+# dd = dispersal distance 
+# brb = bird rate birds 
+nl@experiment <- experiment(expname="Hierarchical_pf04-08_hps3-61_dd1-3_brb1-4_regular",
+                            outpath=outpath,
+                            repetition=1,
+                            tickmetrics="false",
+                            idsetup="setup",
+                            idgo="go",
+                            runtime=0,
+                            metrics=c("birds-at-deforestation", "calc-number-of-species","calc-shannon-diversity","count birds", "mean-free-path","find-cluster-sizes"),
+                            variables = list("birds-dispersal-distance" = list(values=c(1.1, 1.2, 1.5, 2, 3)),
+                                              "habitat-patch-size" = list(values=c(3, 9, 29, 61)),
+                                               "birth-rate-birds" = list(values=c(1.7, 2, 3, 4)),
+                                             "prob-frag" =  list(values=c(0.4,0.8))
+                                             ),
+                            constants = list("world-width" = 199,
+                                             "world-height" = 199,
+                                             "initial-population" = 0,
+                                             "max-birds-species" = 100,
+                                             "death-rate-birds" = 1,
+                                             "migration-rate-birds" = 0.0001,
+                                             "Video" = "false",
+                                             "Deforestation-at-time" = 200,
+                                             "end-time" = 1500,
+                                             "Migration0-at-deforestation" = "false",
+                                             "deforestation-type" = "\"regular\"",
+                                             "birds-behavior" = "\"Hierarchical\"",
+                                             "replacement-rate" = 0.3
+                                             ))
+
+
+#
+# Run nseeds=10 times 
+#
+# Total number of jobs = nseeds * split = 30*2 
+# Each job runs parameter input matrix / split = nrow(nl@simdesign@siminput) / split =  80 / 2 
+#
+
+nl@simdesign <- simdesign_ff(nl=nl,
+                               nseeds=30)
+
+# run in Paralell 
+#
+plan(multisession)
+tic()
+results <- run_nl_all(nl,split = 2)
+#results <- run_nl_all(nl,split = 4)
+toc()
+plan(sequential)
+names(results)
+
+#
+# Write the output 
+#
+setsim(nl, "simoutput") <- results 
+write_simoutput(nl)
+```
+  
 # Plot for hierarchical communities 
 
 ```{r ExploratoryPlotsHierarchical, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
@@ -921,9 +1147,9 @@ ggsave("Figures/AcrossBehav_Shannon_Dispersal_Lambda2_regular.png",width=8,heigh
 
 
 
-## Plots across neutral hierarchical selection modelos regular fragmentation
+## Plots across neutral hierarchical selection modelos fragmentation type
 
-```{r PlotsAcrossBehaviorRegular, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
+```{r PlotsAcrossFragType, echo=FALSE,message=FALSE,warning=FALSE,fig.align='center',eval=FALSE}
 
 mdl <- sloss_sim %>% filter(birds_behavior=="NoSelection", habitat_patch_size != 199)
 names(mdl)
