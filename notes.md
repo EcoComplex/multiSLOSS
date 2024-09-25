@@ -2,6 +2,10 @@
 Habitat amount 20 40 60%
 rmarkdown::render("RunSims.Rmd")
 
+latexdiff ms_SLOSS_submited.tex ms_SLOSS.tex > ms_SLOSS_diff.tex
+pdflatex ms_SLOSS_diff.tex
+
+
 # Source code paragraph deleted to anonimyze the manuscript
 
 The model was developed in Netlogo 6.3.0 and the model source code is available at Github <https://github.com/lsaravia/DynamicForestExtinction>, the Overview, Design concepts, Details (ODD), protocol for describing individual-based models is included within the model source code [@Grimm2010]. We performed the simulations and analysis using R version 4.3.1 [@RCoreTeam2023], the R source code to perform simulations and analysis is located at <https://github.com/EcoComplex/multiSLOSS>. 
