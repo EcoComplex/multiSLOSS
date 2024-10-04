@@ -1,6 +1,6 @@
-## "Why there are more species in several small patches vs few large patches: a multi-species modeling approach"
+## Why there are more species in several small patches vs few large patches: a multi-species modeling approach
 
-Leonardo A. Saravia ^1^^2^, Ulises Balza ^1^, Fernando Momo^3^^4^
+Leonardo A. Saravia (1,2), Ulises Balza (1), Fernando Momo (3,4)
 
 1. Centro Austral de Investigaciones Científicas (CADIC-CONICET). Houssay 200 (9410), Ushuaia, Argentina.
 
