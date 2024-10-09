@@ -1,5 +1,8 @@
-
 ---
+title: "Why there are more species in several small patches vs few large patches:
+  a multi-species modeling approach"
+bibliography: sloss_bib.bib
+csl: "ecology-letters.csl"
 geometry:
  - vmargin=1in
  - hmargin=.6in
@@ -9,7 +12,18 @@ output:
     includes:
       in_header: Appendices.sty
 ---
-# Appendices - Supplementary Information
+
+Leonardo A. Saravia ^1^^2^, Ulises Balza ^1^, Fernando Momo^3^^4^
+
+1. Centro Austral de Investigaciones Científicas (CADIC-CONICET). Houssay 200 (9410), Ushuaia, Argentina.
+
+2. Universidad Nacional de Tierra del Fuego (UNTDF), Yrigoyen 879 (9410), Ushuaia, Argentina
+
+3. Instituto de Ciencias. Universidad Nacional de General Sarmiento. J.M. Gutierrez 1159 (1613), Los Polvorines, Argentina.
+
+4. Departamento de Ciencias Básicas. Universidad Nacional de Luján. Rutas 5 y 7, (6700) Luján. Argentina.
+        
+# Supplementary Information
 
 \small
 

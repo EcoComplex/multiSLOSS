@@ -22,6 +22,19 @@ Leonardo A. Saravia ^1^^2^, Ulises Balza ^1^, Fernando Momo^3^^4^
         
 
 
+
+## Author Contributions
+
+Leonardo Saravia, Ulises Balsa, and Fernando Momo conceived the project. Leonardo Saravia designed, developed, and performed the simulations. He analyzed the data in close consultation with all co-authors. Leonardo Saravia and Ulises Balsa wrote the first draft of the manuscript. All authors contributed to the manuscript’s revision and finalization.
+
 ## Acknowledgments
 
-We acknowledge the financial support provided by the "Fondo para la Investigación Científica y Tecnológica FONCYT" (Grant No. PICT-2020-SERIEA-02628). Additionally, we extend our gratitude to the National University of General Sarmiento (UNGS), especially Santiago Doyle, for granting access to the computational resources utilized in this study.
+We acknowledge the financial support provided by the "Fondo para la Investigación Científica y Tecnológica FONCYT" (Grant No. PICT-2020-SERIEA-02628). Additionally, we extend our gratitude to the National University of General Sarmiento (UNGS), especially to Dr. Santiago Doyle, for granting access to the computational resources utilized in this study. 
+
+## Conflict Of Interest Statement 
+
+We declare no conflict of interest. 
+
+## Data Availability Statement 
+
+The NetLogo model is available for download on GitHub: https://github.com/lsaravia/DynamicForestExtinction and Zenodo https://doi.org/10.5281/zenodo.8157152. Data and R scripts can also be accessed on GitHub: https://github.com/EcoComplex/multiSLOSS and Zenodo https://doi.org/10.5281/zenodo.13891484.

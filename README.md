@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/432276874.svg)](https://doi.org/10.5281/zenodo.13891484)
+
 ## Why there are more species in several small patches vs few large patches: a multi-species modeling approach
 
 Leonardo A. Saravia (1,2), Ulises Balza (1), Fernando Momo (3,4)

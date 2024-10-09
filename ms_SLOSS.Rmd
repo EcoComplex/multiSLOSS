@@ -10,6 +10,16 @@ output:
       in_header: margins.sty
 ---
 
+Leonardo A. Saravia ^1^^2^, Ulises Balza ^1^, Fernando Momo^3^^4^
+
+1. Centro Austral de Investigaciones Científicas (CADIC-CONICET). Houssay 200 (9410), Ushuaia, Argentina.
+
+2. Universidad Nacional de Tierra del Fuego (UNTDF), Yrigoyen 879 (9410), Ushuaia, Argentina
+
+3. Instituto de Ciencias. Universidad Nacional de General Sarmiento. J.M. Gutierrez 1159 (1613), Los Polvorines, Argentina.
+
+4. Departamento de Ciencias Básicas. Universidad Nacional de Luján. Rutas 5 y 7, (6700) Luján. Argentina.
+        
 
 ## Abstract
  
@@ -101,7 +111,7 @@ The parameters encompass a range of $growth-rates$ while holding the $death-rate
 
 The classical neutral model and the habitat selection model could represent endpoints on a continuum of models where the matrix is either completely adverse or not adverse but still unsuitable for reproduction. In the habitat selection model, individuals can search across both the matrix and suitable habitat until they find an empty place. In contrast, for the classical neutral model, individuals have limited or no capacity to search, and the matrix is necessarily detrimental because it increases the probability of death by landing on an unsuitable site.
 
-The model was developed in Netlogo 6.3.0 and the model source code is available at Github <https://>, the Overview, Design concepts, Details (ODD), protocol for describing individual-based models is included within the model source code [@Grimm2010]. We performed the simulations and analysis using R version 4.3.1 [@RCoreTeam2023], the R source code to perform simulations and analysis is located at <https://>. 
+The model was developed in Netlogo 6.3.0 and the model source code is available at Github <https://github.com/lsaravia/DynamicForestExtinction>, the Overview, Design concepts, Details (ODD), protocol for describing individual-based models is included within the model source code [@Grimm2010]. We performed the simulations and analysis using R version 4.3.1 [@RCoreTeam2023], the R source code to perform simulations and analysis is located at <https://github.com/EcoComplex/multiSLOSS>. 
 
 ## Results
 
@@ -158,7 +168,20 @@ Our findings support Fahrig's [-@Fahrig2021] conclusion that conditions favoring
 
 In conclusion, we believe our study adds valuable perspectives to the SLOSS debate, illustrating the complexities of habitat fragmentation and species conservation. While our model has inherent limitations, it provides a useful framework for understanding key ecological processes. Future research should aim to extend these findings to more diverse ecological settings and incorporate how heterogeneity between species influence biodiversity in fragmented landscapes.
 
+## Author Contributions
+
+Leonardo Saravia, Ulises Balsa, and Fernando Momo conceived the project. Leonardo Saravia designed, developed, and performed the simulations. He analyzed the data in close consultation with all co-authors. Leonardo Saravia and Ulises Balsa wrote the first draft of the manuscript. All authors contributed to the manuscript’s revision and finalization.
 
 ## Acknowledgments
+
+We acknowledge the financial support provided by the "Fondo para la Investigación Científica y Tecnológica FONCYT" (Grant No. PICT-2020-SERIEA-02628). Additionally, we extend our gratitude to the National University of General Sarmiento (UNGS), especially to Dr. Santiago Doyle, for granting access to the computational resources utilized in this study. 
+
+## Conflict Of Interest Statement 
+
+We declare no conflict of interest. 
+
+## Data Availability Statement 
+
+The NetLogo model is available for download on GitHub: https://github.com/lsaravia/DynamicForestExtinction. Data and R scripts can also be accessed on GitHub: https://github.com/EcoComplex/multiSLOSS and @Saravia2024.
 
 ## References
