@@ -3,9 +3,9 @@ title: "Why there are more species in several small patches vs few large patches
   a multi-species modeling approach"
 bibliography: sloss_bib.bib
 csl: "ecology-letters.csl"
-
 output:
-  pdf_document: 
+  word_document: default
+  pdf_document:
     includes:
       in_header: margins.sty
 ---
