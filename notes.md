@@ -5,6 +5,16 @@ rmarkdown::render("RunSims.Rmd")
 latexdiff ms_SLOSS_submited.tex ms_SLOSS.tex > ms_SLOSS_diff.tex
 pdflatex ms_SLOSS_diff.tex
 
+# Spanish Abstract
+
+1. La biodiversidad global está disminuyendo rápidamente debido a la pérdida de hábitat, por lo que es crucial determinar cómo protegerla. Muchas agencias de conservación siguen priorizando la preservación de un área grande de hábitat (SL) frente a varias áreas pequeñas de igual tamaño total (SS), a pesar de la evidencia empírica que favorece a SS. Sin embargo, hasta la fecha, aunque numerosos estudios han abordado esta cuestión usando modelos, los resultados son mixtos. En modelos de comunidades competitivas, la fragmentación tiene un efecto negativo en condiciones de hábitat reducido, mientras que los modelos de comunidades neutras sugieren efectos positivos.
+
+2. Este trabajo busca explorar modelos espaciales de múltiples especies para verificar el patrón SS > SL y determinar sus causas. Utilizamos tres tipos de modelos: un modelo neutral clásico, un modelo neutral con selección de hábitat y un modelo jerárquico competitivo. Todos los modelos tienen tres parámetros: extinción, reproducción y distancia de dispersión. En el modelo neutral clásico, las especies son equivalentes y tienen los mismos parámetros; cuando ocurre un evento de reproducción, envían un propágulo a un parche adyacente de manera aleatoria, y si el parche ya está ocupado, el propágulo muere. En el modelo neutral con selección de hábitat, los propágulos seleccionan un parche vacío para asegurar su supervivencia. En el modelo jerárquico, las especies tienen dominancia competitiva y las más dominantes pueden reemplazar a las menos dominantes mediante un parámetro de tasa de reemplazo. Utilizamos 100 especies y comenzamos simulando la colonización de un área vacía para luego destruir una cantidad fija de hábitat usando diferentes tamaños de parches regulares.
+
+3. Los resultados en todos los modelos muestran casi siempre que SS retiene más especies que SL. La extinción de especies en los parches depende del cociente entre las tasas de reproducción y extinción en relación con el tamaño de los parches. El único caso en que SL > SS es cuando la dispersión es insuficiente para conectar los parches, y el tamaño de los parches es menor que el mínimo necesario para prevenir la extinción. Si el tamaño de los parches está por encima del umbral crítico para mantener las poblaciones locales, el patrón SS > SL se debe al efecto de muestreo de la distribución agregada de especies combinado con la reducción en la capacidad de dispersión de las especies.
+
+4. Altas tasas de dispersión producen una homogeneización de la distribución de especies y una reducción en la riqueza de especies, lo cual explica por qué la fragmentación del hábitat retiene más especies cuando los parches son pequeños. El modelo predice que si un conjunto de especies tiene mayores capacidades de dispersión, el efecto SS sería menor en comparación con especies con menor capacidad de dispersión.
+
 
 # Source code paragraph deleted to anonimyze the manuscript
 
